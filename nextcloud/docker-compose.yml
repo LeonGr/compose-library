@@ -1,0 +1,40 @@
+version: '1'
+
+services:
+  db:
+    image: postgres:14.1
+    container_name: nextcloud-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=${DB_ROOT_PASSWD}
+      - POSTGRES_DB=nextcloud
+    ports:
+      - 5432:5432
+    volumes:
+      - nextcloud_postgres:/var/lib/postgresql/data
+
+  nextcloud:
+    image: nextcloud:23.0.1-apache
+    container_name: nextcloud
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - ./shared:/shared
+      - nextcloud:/var/www/html
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=${DB_ROOT_PASSWD}
+    depends_on:
+      - db
+
+volumes:
+  nextcloud:
+    external: true
+    name: nextcloud
+  nextcloud_postgres:
+    external: true
+    name: nextcloud_postgres
