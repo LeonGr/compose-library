@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   db:
@@ -23,8 +23,6 @@ services:
     image: nextcloud:23.0.1-apache
     container_name: nextcloud
     restart: unless-stopped
-    ports:
-      - 8080:80
     volumes:
       - ./shared:/shared
       - nextcloud:/var/www/html
@@ -45,3 +43,8 @@ volumes:
   nextcloud_postgres:
     external: true
     name: nextcloud_postgres
+
+networks:
+  default:
+    external: true
+    name: proxied
