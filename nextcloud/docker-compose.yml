@@ -18,6 +18,8 @@ services:
     image: redis:7.0-rc1
     container_name: nextcloud-redis
     restart: unless-stopped
+    volumes:
+      - nextcloud_redis:/data
 
   nextcloud:
     image: nextcloud:23.0.1-apache
@@ -43,6 +45,9 @@ volumes:
   nextcloud_postgres:
     external: true
     name: nextcloud_postgres
+  nextcloud_redis:
+    external: true
+    name: nextcloud_redis
 
 networks:
   default:
