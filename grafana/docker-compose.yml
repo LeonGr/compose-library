@@ -3,6 +3,7 @@ version: '3'
 services:
   loki:
     image: grafana/loki:2.4.2
+    container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
@@ -16,6 +17,7 @@ services:
 
   promtail:
     image: grafana/promtail:2.4.2
+    container_name: grafana-promtail
     volumes:
       - /var/log:/var/log
       - ./promtail:/etc/promtail
@@ -26,6 +28,7 @@ services:
 
   prometheus:
     image: prom/prometheus:v2.33.3
+    container_name: grafana-prometheus
     restart: unless-stopped
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -35,6 +38,7 @@ services:
 
   node-exporter:
     image: prom/node-exporter:v1.3.1
+    container_name: grafana-node-exporter
     container_name: node-exporter
     restart: unless-stopped
     volumes:
@@ -51,6 +55,7 @@ services:
 
   grafana:
     image: grafana/grafana-oss:8.3.6
+    container_name: grafana
     volumes:
       - grafana-storage:/var/lib/grafana
     ports:
