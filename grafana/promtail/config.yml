@@ -21,7 +21,7 @@ scrape_configs:
   pipeline_stages:
     - docker: {}
   static_configs:
-    - labels:
+  - labels:
       job: docker
       __path__: /var/lib/docker/containers/*/*-json.log
 
