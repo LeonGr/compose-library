@@ -45,6 +45,16 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
 
+  blackbox-exporter:
+    image: prom/blackbox-exporter:v0.19.0
+    container_name: grafana-blackbox-exporter
+    ports:
+      - "9115:9115"
+    volumes:
+      - ./blackbox/blackbox.yml:/etc/prometheus/blackbox.yml:ro
+    command:
+      - --config.file=/etc/prometheus/blackbox.yml
+
   grafana:
     image: grafana/grafana-oss:8.3.6
     container_name: grafana
