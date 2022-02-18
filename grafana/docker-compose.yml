@@ -35,7 +35,6 @@ services:
   node-exporter:
     image: prom/node-exporter:v1.3.1
     container_name: grafana-node-exporter
-    container_name: node-exporter
     restart: unless-stopped
     volumes:
       - /proc:/host/proc:ro
@@ -59,16 +58,18 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
-    container_name: cadvisor
-    ports:
-    - 8080:8080
+    container_name: grafana-cadvisor
     volumes:
     - /:/rootfs:ro
     - /var/run:/var/run:rw
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
-    # devices:
-      # - /dev/kmsg:/dev/kmsg
+
+  docker-exporter:
+    image: prometheusnet/docker_exporter
+    container_name: grafana-docker-exporter
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
   grafana:
     image: grafana/grafana-oss:8.3.6
