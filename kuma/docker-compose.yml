@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    restart: unless-stopped
+    container_name: uptime-kuma
+    ports:
+      - 3001:3001
+    volumes:
+      - uptime-kuma:/app/date
+
+volumes:
+  uptime-kuma:
+    external: true
+    name: uptime-kuma
+
+networks:
+  default:
+    external: true
+    name: proxied
