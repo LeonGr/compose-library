@@ -11,6 +11,8 @@ services:
       - /home/leon/Media:/media
       - ./jellyfin/config:/config
       - ./jellyfin/cache:/cache
+    networks:
+      - proxied
 
   transmission-openvpn:
     image: haugene/transmission-openvpn
@@ -96,3 +98,8 @@ services:
       - /home/leon/Media/completed:/data/completed
     ports:
       - 6767:6767
+
+networks:
+  proxied:
+    external: true
+    name: proxied
