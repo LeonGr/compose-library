@@ -20,7 +20,7 @@ services:
       - nextcloud_redis:/data
 
   nextcloud:
-    image: nextcloud:23.0.1-apache
+    image: nextcloud:23.0.2-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
