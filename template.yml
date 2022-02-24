@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  NAME:
+    image: 'IMAGE'
+    restart: unless-stopped
+    container_name: NAME
+    ports:
+      - xxxx:xxxx
+    volumes:
+      - ./HOST_PATH:/CONTAINER_PATH
+      - VOLUME:/CONTAINER_PATH
+    networks:
+      - NETWORK
+
+volumes:
+  VOLUME:
+    external: true
+    name: VOLUME_NAME
+
+networks:
+  default:
+    external: true
+    name: NETWORK_NAME
+  NETWORK:
+    external: false
+    name: NETWORK_NAME
