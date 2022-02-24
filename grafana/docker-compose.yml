@@ -7,6 +7,8 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
+    networks:
+      - grafana
     # also:
     # - run:
     # docker plugin install grafana/loki-docker-driver:2.4.2 --alias loki --grant-all-permissions
@@ -21,6 +23,8 @@ services:
       - ./promtail:/etc/promtail
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
     command: -config.file=/etc/promtail/config.yml
+    networks:
+      - grafana
 
   prometheus:
     image: prom/prometheus:v2.33.3
@@ -31,6 +35,8 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
+    networks:
+      - grafana
 
   node-exporter:
     image: prom/node-exporter:v1.3.1
@@ -45,6 +51,8 @@ services:
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - grafana
 
   blackbox-exporter:
     image: prom/blackbox-exporter:v0.19.0
@@ -55,6 +63,8 @@ services:
       - ./blackbox/blackbox.yml:/etc/prometheus/blackbox.yml:ro
     command:
       - --config.file=/etc/prometheus/blackbox.yml
+    networks:
+      - grafana
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
@@ -64,12 +74,16 @@ services:
     - /var/run:/var/run:rw
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - grafana
 
   docker-exporter:
     image: prometheusnet/docker_exporter
     container_name: grafana-docker-exporter
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - grafana
 
   grafana:
     image: grafana/grafana-oss:8.3.6
@@ -79,12 +93,16 @@ services:
     ports:
       - 3000:3000
     networks:
+      - grafana
       - proxied
 
 networks:
   proxied:
     external: true
     name: proxied
+  grafana:
+    external: false
+    name: grafana
 
 volumes:
   grafana-storage:
