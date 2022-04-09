@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     ports:
       - 8096:8096
-    container_name: jellyfin
+    container_name: media-jellyfin
     volumes:
       - /home/leon/Media:/media
       - ./jellyfin/config:/config
@@ -16,7 +16,7 @@ services:
 
   transmission-openvpn:
     image: haugene/transmission-openvpn
-    container_name: transmission-openvpn
+    container_name: media-transmission-openvpn
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -36,7 +36,7 @@ services:
 
   radarr:
     image: linuxserver/radarr
-    container_name: radarr
+    container_name: media-radarr
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -53,7 +53,7 @@ services:
 
   sonarr:
     image: linuxserver/sonarr
-    container_name: sonarr
+    container_name: media-sonarr
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -70,7 +70,7 @@ services:
 
   jackett:
     image: linuxserver/jackett
-    container_name: jackett
+    container_name: media-jackett
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -84,7 +84,7 @@ services:
 
   bazarr:
     image: linuxserver/bazarr
-    container_name: bazarr
+    container_name: media-bazarr
     restart: unless-stopped
     environment:
       - PUID=1000
