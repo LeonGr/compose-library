@@ -26,15 +26,15 @@ scrape_configs:
     static_configs:
       - targets:
         - https://cloud.lhax.xyz:1234/
-        # - https://cloud.lhax.xyz:9396/
-        # - https://status.lhax.xyz:1234/
-        - https://192.168.3.9:9396/
+        - https://media.lhax.xyz:1234/
+        - https://paper.lhax.xyz:1234/
+        - https://status.lhax.xyz:1234/
+        - https://cloud.lhax.xyz:9396/
+        # - https://192.168.3.9:9396/
         - https://lhax.xyz/
         - https://io.lhax.xyz:5000
         - https://leongr.nl/
         - https://concertrack.com/
-        - http://grafana:3000
-        - http://nginx-proxy-manager:81
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
