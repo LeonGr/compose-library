@@ -92,6 +92,8 @@ services:
       DISABLE_GOOGLE_CHROME: 1
     networks:
       - paperless
+    ports:
+      - "8001:3000"
 
   tika:
     image: apache/tika
