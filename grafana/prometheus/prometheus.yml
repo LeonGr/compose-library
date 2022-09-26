@@ -25,12 +25,11 @@ scrape_configs:
       module: [http_2xx]
     static_configs:
       - targets:
-        - https://cloud.lhax.xyz:1234/
-        - https://media.lhax.xyz:1234/
-        - https://paper.lhax.xyz:1234/
-        - https://status.lhax.xyz:1234/
-        - https://cloud.lhax.xyz:9396/
-        # - https://192.168.3.9:9396/
+        - https://cloud.lhax.xyz/
+        - https://media.lhax.xyz/
+        - https://paper.lhax.xyz/
+        - https://status.lhax.xyz/
+        - https://znc.lhax.xyz/
         - https://lhax.xyz/
         - https://io.lhax.xyz:5000
         - https://leongr.nl/
