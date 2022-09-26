@@ -41,7 +41,8 @@ services:
       - redis
     networks:
       - nextcloud
-      - proxied
+    ports:
+      - 80:80
 
 volumes:
   nextcloud:
@@ -55,9 +56,6 @@ volumes:
     name: nextcloud_redis
 
 networks:
-  proxied:
-    external: true
-    name: proxied
   nextcloud:
     external: false
     name: nextcloud

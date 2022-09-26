@@ -94,12 +94,8 @@ services:
       - 3000:3000
     networks:
       - grafana
-      - proxied
 
 networks:
-  proxied:
-    external: true
-    name: proxied
   grafana:
     external: false
     name: grafana

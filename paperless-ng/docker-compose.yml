@@ -82,7 +82,6 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
     networks:
       - paperless
-      - proxied
 
   gotenberg:
     image: thecodingmachine/gotenberg
@@ -111,6 +110,3 @@ networks:
   paperless:
     external: false
     name: paperless
-  proxied:
-    external: true
-    name: proxied
