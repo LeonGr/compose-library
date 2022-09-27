@@ -29,6 +29,7 @@ scrape_configs:
         - https://media.lhax.xyz/
         - https://paper.lhax.xyz/
         - https://status.lhax.xyz/
+        - https://rss.lhax.xyz/
         - https://znc.lhax.xyz/
         - https://lhax.xyz/
         - https://io.lhax.xyz:5000
