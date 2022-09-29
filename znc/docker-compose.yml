@@ -4,6 +4,7 @@ services:
     image: znc:latest
     container_name: znc
     restart: unless-stopped
+    user: "1000:1000"
     volumes:
       - /home/leon/Services/docker-library/znc/.znc/:/znc-data
     ports:
