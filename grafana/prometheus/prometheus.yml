@@ -32,7 +32,6 @@ scrape_configs:
         - https://rss.lhax.xyz/
         - https://znc.lhax.xyz/
         - https://lhax.xyz/
-        - https://io.lhax.xyz:5000
         - https://leongr.nl/
         - https://concertrack.com/
     relabel_configs:
