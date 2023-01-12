@@ -3,7 +3,7 @@
 version: '3.4'
 services:
   miniflux:
-    image: miniflux/miniflux:latest
+    image: miniflux/miniflux:2.0.41
     container_name: miniflux
     ports:
       - "8070:8080"
@@ -16,7 +16,7 @@ services:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
   db:
-    image: postgres:latest
+    image: postgres:14.6
     container_name: miniflux-postgres
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
