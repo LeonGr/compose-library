@@ -102,3 +102,19 @@ services:
       - /home/leon/Media/completed:/data/completed
     ports:
       - 6767:6767
+
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: music-lidarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/leon/Services/docker-library/media-stack/lidarr:/config
+      - /home/leon/Media/music:/music
+      - /home/leon/Media/downloads:/downloads
+      - /home/leon/Media/completed:/data/completed
+    ports:
+      - 8686:8686
