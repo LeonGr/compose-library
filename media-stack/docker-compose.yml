@@ -24,6 +24,7 @@ services:
     restart: unless-stopped
     environment:
       ND_SCANSCHEDULE: 1h
+      ND_CONFIGFILE: "/data/navidrome.toml"
     volumes:
       - "./navidrome:/data"
       - "/home/leon/Media/music:/music:ro"
