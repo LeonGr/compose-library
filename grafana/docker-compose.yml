@@ -77,6 +77,18 @@ services:
     networks:
       - grafana
 
+  docker_state_exporter:
+    image: karugaru/docker_state_exporter@sha256:99d984a57dd11d0d3b53d56481dec51be7a0ad7c2a7aa80a95db2facd294c60a
+    container_name: grafana-docker-state-exporter
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    ports:
+      - "9418:8080"
+    networks:
+      - grafana
+
   grafana:
     image: grafana/grafana-oss:9.3.2
     container_name: grafana
