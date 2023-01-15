@@ -18,6 +18,18 @@ services:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
 
+  navidrome:
+    image: deluan/navidrome:0.48.0
+    container_name: media-navidrome
+    restart: unless-stopped
+    environment:
+      ND_SCANSCHEDULE: 1h
+    volumes:
+      - "./navidrome:/data"
+      - "/home/leon/Media/music:/music:ro"
+    ports:
+      - "4533:4533"
+
   transmission-openvpn:
     image: haugene/transmission-openvpn:4.3.2
     container_name: media-transmission-openvpn
