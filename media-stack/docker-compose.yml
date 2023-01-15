@@ -118,3 +118,16 @@ services:
       - /home/leon/Media/completed:/data/completed
     ports:
       - 8686:8686
+
+  prowlarr:
+    image: linuxserver/prowlarr:1.0.1
+    container_name: media-prowlarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/leon/Services/docker-library/media-stack/prowlarr:/config
+    ports:
+      - 9696:9696
