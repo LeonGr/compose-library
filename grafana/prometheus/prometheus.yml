@@ -27,6 +27,7 @@ scrape_configs:
       - targets:
         - https://cloud.lhax.xyz/
         - https://media.lhax.xyz/
+        - https://music.lhax.xyz/
         - https://paper.lhax.xyz/
         - https://status.lhax.xyz/
         - https://rss.lhax.xyz/
