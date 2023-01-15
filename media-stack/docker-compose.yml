@@ -105,7 +105,7 @@ services:
 
   lidarr:
     image: linuxserver/lidarr:1.0.2
-    container_name: music-lidarr
+    container_name: media-lidarr
     restart: unless-stopped
     environment:
       - PUID=1000
