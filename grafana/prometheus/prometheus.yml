@@ -33,7 +33,6 @@ scrape_configs:
         - https://znc.lhax.xyz/
         - https://lhax.xyz/
         - https://leongr.nl/
-        - https://concertrack.com/
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
