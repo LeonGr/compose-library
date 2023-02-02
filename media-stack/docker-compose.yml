@@ -34,6 +34,8 @@ services:
   transmission-openvpn:
     image: haugene/transmission-openvpn:4.3.2
     container_name: media-transmission-openvpn
+    mem_limit: 2g
+    memswap_limit: 2g
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
