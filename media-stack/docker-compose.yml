@@ -51,6 +51,21 @@ services:
     ports:
       - 9091:9091
 
+  # nzbget:
+    # image: linuxserver/nzbget:version-v21.1
+    # restart: unless-stopped
+    # container_name: media-nzbget
+    # environment:
+      # - PUID=1000
+      # - PGID=1000
+      # - TZ=Europe/Europe
+    # volumes:
+      # - ./nzbget:/config
+      # - /home/leon/Media/nzbget/downloads:/downloads
+      # - /home/leon/Media/completed:/downloads/completed
+    # ports:
+      # - 6789:6789
+
   radarr:
     image: linuxserver/radarr:4.3.2
     container_name: media-radarr
