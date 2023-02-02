@@ -92,6 +92,8 @@ services:
   grafana:
     image: grafana/grafana-oss:9.3.2
     container_name: grafana
+    environment:
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
     volumes:
       - grafana-storage:/var/lib/grafana
     ports:
