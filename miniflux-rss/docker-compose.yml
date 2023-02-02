@@ -5,6 +5,7 @@ services:
   miniflux:
     image: miniflux/miniflux:2.0.41
     container_name: miniflux
+    restart: unless-stopped
     ports:
       - "8070:8080"
     depends_on:
@@ -15,9 +16,11 @@ services:
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+
   db:
     image: postgres:15.1
     container_name: miniflux-postgres
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
