@@ -33,14 +33,14 @@
 version: "3.4"
 services:
   broker:
-    image: redis:7.0.7
+    image: redis:7.0.8
     container_name: paperless-redis
     restart: unless-stopped
     networks:
       - paperless
 
   db:
-    image: postgres:15.1
+    image: postgres:15.2
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
@@ -84,7 +84,7 @@ services:
       - paperless
 
   gotenberg:
-    image: thecodingmachine/gotenberg:7.7.2
+    image: thecodingmachine/gotenberg:7.8.0
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
@@ -93,7 +93,7 @@ services:
       - paperless
 
   tika:
-    image: apache/tika:2.6.0.1-full
+    image: apache/tika:2.7.0.0-full
     container_name: paperless-tika
     restart: unless-stopped
     networks:
