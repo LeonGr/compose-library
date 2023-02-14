@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres:15.1
+    image: postgres:15.2
     container_name: nextcloud-postgres
     restart: unless-stopped
     environment:
@@ -15,7 +15,7 @@ services:
       - nextcloud
 
   redis:
-    image: redis:7.0.7
+    image: redis:7.0.8
     container_name: nextcloud-redis
     restart: unless-stopped
     volumes:
@@ -24,7 +24,7 @@ services:
       - nextcloud
 
   nextcloud:
-    image: nextcloud:stable-apache
+    image: nextcloud:25.0.3-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
