@@ -19,7 +19,7 @@ services:
       - /dev/dri/card0:/dev/dri/card0
 
   navidrome:
-    image: deluan/navidrome:0.48.0
+    image: deluan/navidrome:0.49.3
     container_name: media-navidrome
     restart: unless-stopped
     environment:
