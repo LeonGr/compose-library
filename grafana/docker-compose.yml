@@ -2,7 +2,7 @@ version: '3'
 
 services:
   loki:
-    image: grafana/loki:2.7.3
+    image: docker.io/grafana/loki:2.7.3
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     ports:
@@ -16,7 +16,7 @@ services:
     # https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#change-the-default-logging-driver
 
   promtail:
-    image: grafana/promtail:2.7.3
+    image: docker.io/grafana/promtail:2.7.3
     container_name: grafana-promtail
     volumes:
       - /var/log:/var/log
@@ -27,7 +27,7 @@ services:
       - grafana
 
   prometheus:
-    image: prom/prometheus:v2.42.0
+    image: docker.io/prom/prometheus:v2.42.0
     container_name: grafana-prometheus
     restart: unless-stopped
     ports:
@@ -39,7 +39,7 @@ services:
       - grafana
 
   node-exporter:
-    image: prom/node-exporter:v1.5.0
+    image: docker.io/prom/node-exporter:v1.5.0
     container_name: grafana-node-exporter
     restart: unless-stopped
     volumes:
@@ -55,7 +55,7 @@ services:
       - grafana
 
   blackbox-exporter:
-    image: prom/blackbox-exporter:v0.23.0
+    image: docker.io/prom/blackbox-exporter:v0.23.0
     container_name: grafana-blackbox-exporter
     ports:
       - "9115:9115"
@@ -78,7 +78,7 @@ services:
       - grafana
 
   docker_state_exporter:
-    image: karugaru/docker_state_exporter@sha256:99d984a57dd11d0d3b53d56481dec51be7a0ad7c2a7aa80a95db2facd294c60a
+    image: docker.io/karugaru/docker_state_exporter@sha256:99d984a57dd11d0d3b53d56481dec51be7a0ad7c2a7aa80a95db2facd294c60a
     container_name: grafana-docker-state-exporter
     volumes:
       - type: bind
@@ -90,7 +90,7 @@ services:
       - grafana
 
   grafana:
-    image: grafana/grafana-oss:9.4.0-beta1
+    image: docker.io/grafana/grafana-oss:9.4.0-beta1
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
