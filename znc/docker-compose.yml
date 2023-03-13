@@ -5,7 +5,7 @@ services:
     container_name: znc
     restart: unless-stopped
     volumes:
-      - /home/leon/Services/docker-library/znc/.znc/:/znc-data
+      - ./.znc/:/znc-data
     ports:
       - 9396:9396
       - 9397:9397
