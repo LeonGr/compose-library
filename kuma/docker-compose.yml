@@ -8,9 +8,4 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - uptime-kuma:/app/date
-
-volumes:
-  uptime-kuma:
-    external: true
-    name: uptime-kuma
+      - ./data:/app/data
