@@ -15,16 +15,16 @@ services:
     # - change default logging driver:
     # https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#change-the-default-logging-driver
 
-  promtail:
-    image: docker.io/grafana/promtail:2.7.3
-    container_name: grafana-promtail
-    volumes:
-      - /var/log:/var/log
-      - ./promtail:/etc/promtail
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-    command: -config.file=/etc/promtail/config.yml
-    networks:
-      - grafana
+  # promtail:
+    # image: docker.io/grafana/promtail:2.7.3
+    # container_name: grafana-promtail
+    # volumes:
+      # - /var/log:/var/log
+      # - ./promtail:/etc/promtail
+      # - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    # command: -config.file=/etc/promtail/config.yml
+    # networks:
+      # - grafana
 
   prometheus:
     image: docker.io/prom/prometheus:v2.42.0
@@ -66,28 +66,18 @@ services:
     networks:
       - grafana
 
-  cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.47.0
-    container_name: grafana-cadvisor
+  prometheus_podman_exporter:
+    image: quay.io/navidys/prometheus-podman-exporter
+    container_name: grafana-prometheus-podman-exporter
+    environment:
+      - CONTAINER_HOST=unix:///run/podman/podman.sock
     volumes:
-    - /:/rootfs:ro
-    - /var/run:/var/run:rw
-    - /sys:/sys:ro
-    - /var/lib/docker/:/var/lib/docker:ro
-    networks:
-      - grafana
-
-  docker_state_exporter:
-    image: docker.io/karugaru/docker_state_exporter@sha256:99d984a57dd11d0d3b53d56481dec51be7a0ad7c2a7aa80a95db2facd294c60a
-    container_name: grafana-docker-state-exporter
-    volumes:
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-    ports:
-      - "9418:8080"
-    networks:
-      - grafana
+      - $XDG_RUNTIME_DIR/podman/podman.sock:/run/podman/podman.sock
+    security_opt:
+      - label=disable
+    userns:
+      - keep-id
+    user: "1000"
 
   grafana:
     image: docker.io/grafana/grafana-oss:9.4.0-beta1
