@@ -42,7 +42,7 @@ services:
     networks:
       - nextcloud
     ports:
-      - 80:80
+      - 6952:80
 
 volumes:
   nextcloud:
