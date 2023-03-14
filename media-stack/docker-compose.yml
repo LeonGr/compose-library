@@ -48,10 +48,13 @@ services:
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - LOCAL_NETWORK=192.168.0.0/16
       - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
+      - CREATE_TUN_DEVICE=false
     sysctls:
         - "net.ipv6.conf.all.disable_ipv6=0"
     ports:
       - 9091:9091
+    devices:
+      - /dev/net/tun:/dev/net/tun
 
   # nzbget:
     # image: docker.io/linuxserver/nzbget:version-v21.1
