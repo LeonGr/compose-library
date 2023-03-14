@@ -15,7 +15,7 @@ services:
       - nextcloud
 
   redis:
-    image: docker.io/library/redis:7.0.8
+    image: docker.io/library/redis:7.0.9
     container_name: nextcloud-redis
     restart: unless-stopped
     volumes:
@@ -24,7 +24,7 @@ services:
       - nextcloud
 
   nextcloud:
-    image: docker.io/library/nextcloud:25.0.3-apache
+    image: docker.io/library/nextcloud:25.0.4-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
