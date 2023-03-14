@@ -80,6 +80,7 @@ services:
       PHOTOPRISM_GID: 1000
       PHOTOPRISM_UMASK: 0000
       PHOTOPRISM_WORKERS: 1
+      PHOTOPRISM_WAKEUP_INTERVAL: 1h
     working_dir: "/photoprism"
     volumes:
       - ~/.local/share/containers/storage/volumes/nextcloud/_data/data/admin/files:/photoprism/originals:ro
