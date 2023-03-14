@@ -2,7 +2,7 @@ version: '3'
 
 services:
   loki:
-    image: docker.io/grafana/loki:2.7.3
+    image: docker.io/grafana/loki:2.7.4
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     ports:
@@ -16,7 +16,7 @@ services:
     # https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#change-the-default-logging-driver
 
   # promtail:
-    # image: docker.io/grafana/promtail:2.7.3
+    # image: docker.io/grafana/promtail:2.7.4
     # container_name: grafana-promtail
     # volumes:
       # - /var/log:/var/log
@@ -80,7 +80,7 @@ services:
     user: "1000"
 
   grafana:
-    image: docker.io/grafana/grafana-oss:9.4.0-beta1
+    image: docker.io/grafana/grafana-oss:9.4.3
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
