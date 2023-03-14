@@ -1,2 +1,2 @@
-# docker-library
-Various docker(-compose) files
+# compose-library
+Various compose files
