@@ -1,39 +1,39 @@
 version: "3"
 
 services:
-  db:
-    image: mariadb:10.9.5
-    container_name: photos-mariadb
-    restart: always
-    environment:
-      - MYSQL_DATABASE=photoview
-      - MYSQL_USER=photoview
-      - MYSQL_PASSWORD=photosecret
-      - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
+  # db:
+    # image: mariadb:10.9.5
+    # container_name: photos-mariadb
+    # restart: always
+    # environment:
+      # - MYSQL_DATABASE=photoview
+      # - MYSQL_USER=photoview
+      # - MYSQL_PASSWORD=photosecret
+      # - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    # volumes:
+      # - db_data:/var/lib/mysql
 
-  photoview:
-    image: viktorstrate/photoview:2.3
-    container_name: photos-photoview
-    restart: always
-    ports:
-      - "4001:4001"
-    depends_on:
-      - db
-    environment:
-      - PHOTOVIEW_DATABASE_DRIVER=mysql
-      - PHOTOVIEW_MYSQL_URL=photoview:photosecret@tcp(db)/photoview
-      - PHOTOVIEW_LISTEN_IP=photoview
-      - PHOTOVIEW_LISTEN_PORT=4001
-      - PHOTOVIEW_MEDIA_CACHE=/app/cache
-      # Optional: To enable map related features, you need to create a mapbox token.
-      # A token can be generated for free here https://account.mapbox.com/access-tokens/
-      # It's a good idea to limit the scope of the token to your own domain, to prevent others from using it.
-      # - MAPBOX_TOKEN=<YOUR TOKEN HERE>
-    volumes:
-      - api_cache:/app/cache
-      - /var/lib/docker/volumes/nextcloud/_data/data/admin/files:/nextcloud_admin:ro
+  # photoview:
+    # image: viktorstrate/photoview:2.3
+    # container_name: photos-photoview
+    # restart: always
+    # ports:
+      # - "4001:4001"
+    # depends_on:
+      # - db
+    # environment:
+      # - PHOTOVIEW_DATABASE_DRIVER=mysql
+      # - PHOTOVIEW_MYSQL_URL=photoview:photosecret@tcp(db)/photoview
+      # - PHOTOVIEW_LISTEN_IP=photoview
+      # - PHOTOVIEW_LISTEN_PORT=4001
+      # - PHOTOVIEW_MEDIA_CACHE=/app/cache
+      # # Optional: To enable map related features, you need to create a mapbox token.
+      # # A token can be generated for free here https://account.mapbox.com/access-tokens/
+      # # It's a good idea to limit the scope of the token to your own domain, to prevent others from using it.
+      # # - MAPBOX_TOKEN=<YOUR TOKEN HERE>
+    # volumes:
+      # - api_cache:/app/cache
+      # - /var/lib/docker/volumes/nextcloud/_data/data/admin/files:/nextcloud_admin:ro
 
   photoprism:
     image: photoprism/photoprism:221118-jammy
