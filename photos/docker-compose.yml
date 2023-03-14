@@ -104,12 +104,8 @@ services:
     working_dir: "/photoprism" # do not change or remove
     ## Storage Folders: "~" is a shortcut for your home directory, "." for the current directory
     volumes:
-      # "/host/folder:/photoprism/folder"                # Example
-      # - "~/Pictures:/photoprism/originals"               # Original media files (DO NOT REMOVE)
-      - /var/lib/docker/volumes/nextcloud/_data/data/admin/files:/photoprism/originals:ro
-      # - "/example/family:/photoprism/originals/family" # *Additional* media folders can be mounted like this
-      # - "~/Import:/photoprism/import"                  # *Optional* base folder from which files can be imported to originals
-      - "./storage:/photoprism/storage"                  # *Writable* storage folder for cache, database, and sidecar files (DO NOT REMOVE)
+      - ~/.local/share/containers/storage/volumes/nextcloud/_data/data/admin/files:/photoprism/originals:ro
+      - "~/Media/photos/storage:/photoprism/storage"
 
   ## Database Server (recommended)
   ## see https://docs.photoprism.app/getting-started/faq/#should-i-use-sqlite-mariadb-or-mysql
