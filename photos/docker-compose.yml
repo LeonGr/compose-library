@@ -36,7 +36,7 @@ services:
       # - /var/lib/docker/volumes/nextcloud/_data/data/admin/files:/nextcloud_admin:ro
 
   photoprism:
-    image: photoprism/photoprism:221118-jammy
+    image: docker.io/photoprism/photoprism:221118-jammy
     container_name: photos-photoprism
     depends_on:
       - mariadb
@@ -114,11 +114,11 @@ services:
   ## Database Server (recommended)
   ## see https://docs.photoprism.app/getting-started/faq/#should-i-use-sqlite-mariadb-or-mysql
   mariadb:
+    image: docker.io/library/mariadb:10.11.2
     container_name: photos-photoprism-mariadb
     ## If MariaDB gets stuck in a restart loop, this points to a memory or filesystem issue:
     ## https://docs.photoprism.app/getting-started/troubleshooting/#fatal-server-errors
     restart: unless-stopped
-    image: mariadb:10.11.2
     security_opt: # see https://github.com/MariaDB/mariadb-docker/issues/434#issuecomment-1136151239
       - seccomp:unconfined
       - apparmor:unconfined
