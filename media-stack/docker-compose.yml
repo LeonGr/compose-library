@@ -8,7 +8,7 @@ services:
       - 8096:8096
     container_name: media-jellyfin
     volumes:
-      - /home/leon/Media:/media
+      - ~/Media:/media
       - ./jellyfin/config:/config
       - ./jellyfin/cache:/cache
     group_add:
@@ -27,7 +27,7 @@ services:
       ND_CONFIGFILE: "/data/navidrome.toml"
     volumes:
       - "./navidrome:/data"
-      - "/home/leon/Media/music:/music:ro"
+      - "~/Media/music:/music:ro"
     ports:
       - "4533:4533"
 
@@ -40,7 +40,7 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - /home/leon/Media:/data
+      - ~/Media:/data
     environment:
       - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
       - OPENVPN_CONFIG=${OPENVPN_CONFIG}
@@ -66,8 +66,8 @@ services:
       # - TZ=Europe/Europe
     # volumes:
       # - ./nzbget:/config
-      # - /home/leon/Media/nzbget/downloads:/downloads
-      # - /home/leon/Media/completed:/downloads/completed
+      # - ~/Media/nzbget/downloads:/downloads
+      # - ~/Media/completed:/downloads/completed
     # ports:
       # - 6789:6789
 
@@ -81,10 +81,10 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - ./radarr:/config
-      - /home/leon/Media/movies:/movies
-      - /home/leon/Media/shows:/tv
-      - /home/leon/Media/downloads:/downloads
-      - /home/leon/Media/completed:/data/completed
+      - ~/Media/movies:/movies
+      - ~/Media/shows:/tv
+      - ~/Media/downloads:/downloads
+      - ~/Media/completed:/data/completed
     ports:
       - 7878:7878
 
@@ -98,10 +98,10 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - ./sonarr:/config
-      - /home/leon/Media/movies:/movies
-      - /home/leon/Media/shows:/tv
-      - /home/leon/Media/downloads:/downloads
-      - /home/leon/Media/completed:/data/completed
+      - ~/Media/movies:/movies
+      - ~/Media/shows:/tv
+      - ~/Media/downloads:/downloads
+      - ~/Media/completed:/data/completed
     ports:
       - 8989:8989
 
@@ -115,7 +115,7 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - ./jackett:/config
-      - /home/leon/Media/downloads:/downloads
+      - ~/Media/downloads:/downloads
     ports:
       - 9117:9117
 
@@ -129,10 +129,10 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - ./bazarr:/config
-      - /home/leon/Media/movies:/movies
-      - /home/leon/Media/shows:/tv
-      - /home/leon/Media/downloads:/downloads
-      - /home/leon/Media/completed:/data/completed
+      - ~/Media/movies:/movies
+      - ~/Media/shows:/tv
+      - ~/Media/downloads:/downloads
+      - ~/Media/completed:/data/completed
     ports:
       - 6767:6767
 
@@ -145,10 +145,10 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/leon/Services/docker-library/media-stack/lidarr:/config
-      - /home/leon/Media/music:/music
-      - /home/leon/Media/downloads:/downloads
-      - /home/leon/Media/completed:/data/completed
+      - ./lidarr:/config
+      - ~/Media/music:/music
+      - ~/Media/downloads:/downloads
+      - ~/Media/completed:/data/completed
     ports:
       - 8686:8686
 
