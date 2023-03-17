@@ -8,7 +8,7 @@ services:
       - 8096:8096
     container_name: media-jellyfin
     volumes:
-      - ~/Media:/media
+      - ~/Media/media-stack:/media
       - ./jellyfin/config:/config
       - ./jellyfin/cache:/cache
     group_add:
@@ -17,6 +17,7 @@ services:
       # VAAPI Devices
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
+    user: 1001:1001
 
   navidrome:
     image: docker.io/deluan/navidrome:0.49.3
@@ -27,9 +28,10 @@ services:
       ND_CONFIGFILE: "/data/navidrome.toml"
     volumes:
       - "./navidrome:/data"
-      - "~/Media/music:/music:ro"
+      - "~/Media/media-stack/music:/music:ro"
     ports:
       - "4533:4533"
+    user: 1001:1001
 
   transmission-openvpn:
     image: docker.io/haugene/transmission-openvpn:4.3.2
@@ -40,7 +42,7 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - ~/Media:/data
+      - ~/Media/media-stack:/data
     environment:
       - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
       - OPENVPN_CONFIG=${OPENVPN_CONFIG}
@@ -49,6 +51,8 @@ services:
       - LOCAL_NETWORK=192.168.0.0/16
       - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
       - CREATE_TUN_DEVICE=false
+      - PUID=1001
+      - PGID=1001
     sysctls:
         - "net.ipv6.conf.all.disable_ipv6=0"
     ports:
@@ -61,8 +65,8 @@ services:
     # restart: unless-stopped
     # container_name: media-nzbget
     # environment:
-      # - PUID=1000
-      # - PGID=1000
+      # - PUID=1001
+      # - PGID=1001
       # - TZ=Europe/Europe
     # volumes:
       # - ./nzbget:/config
@@ -76,15 +80,15 @@ services:
     container_name: media-radarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - TZ=Europe/Amsterdam
     volumes:
       - ./radarr:/config
-      - ~/Media/movies:/movies
-      - ~/Media/shows:/tv
-      - ~/Media/downloads:/downloads
-      - ~/Media/completed:/data/completed
+      - ~/Media/media-stack/movies:/movies
+      - ~/Media/media-stack/shows:/tv
+      - ~/Media/media-stack/downloads:/downloads
+      - ~/Media/media-stack/completed:/data/completed
     ports:
       - 7878:7878
 
@@ -93,15 +97,15 @@ services:
     container_name: media-sonarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - TZ=Europe/Amsterdam
     volumes:
       - ./sonarr:/config
-      - ~/Media/movies:/movies
-      - ~/Media/shows:/tv
-      - ~/Media/downloads:/downloads
-      - ~/Media/completed:/data/completed
+      - ~/Media/media-stack/movies:/movies
+      - ~/Media/media-stack/shows:/tv
+      - ~/Media/media-stack/downloads:/downloads
+      - ~/Media/media-stack/completed:/data/completed
     ports:
       - 8989:8989
 
@@ -110,12 +114,12 @@ services:
     container_name: media-jackett
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - TZ=Europe/Amsterdam
     volumes:
       - ./jackett:/config
-      - ~/Media/downloads:/downloads
+      - ~/Media/media-stack/downloads:/downloads
     ports:
       - 9117:9117
 
@@ -124,15 +128,15 @@ services:
     container_name: media-bazarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - TZ=Europe/Amsterdam
     volumes:
       - ./bazarr:/config
-      - ~/Media/movies:/movies
-      - ~/Media/shows:/tv
-      - ~/Media/downloads:/downloads
-      - ~/Media/completed:/data/completed
+      - ~/Media/media-stack/movies:/movies
+      - ~/Media/media-stack/shows:/tv
+      - ~/Media/media-stack/downloads:/downloads
+      - ~/Media/media-stack/completed:/data/completed
     ports:
       - 6767:6767
 
@@ -141,14 +145,14 @@ services:
     container_name: media-lidarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - TZ=Europe/Amsterdam
     volumes:
       - ./lidarr:/config
-      - ~/Media/music:/music
-      - ~/Media/downloads:/downloads
-      - ~/Media/completed:/data/completed
+      - ~/Media/media-stack/music:/music
+      - ~/Media/media-stack/downloads:/downloads
+      - ~/Media/media-stack/completed:/data/completed
     ports:
       - 8686:8686
 
@@ -157,8 +161,8 @@ services:
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - TZ=Europe/Amsterdam
     volumes:
       - ./prowlarr:/config
