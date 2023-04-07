@@ -15,6 +15,10 @@ scrape_configs:
     static_configs:
     - targets: ["prometheus_podman_exporter:9882"]
 
+  - job_name: "webdav-usage"
+    static_configs:
+      - targets: ["webdav-usage:9393"]
+
   - job_name: "blackbox"
     metrics_path: /probe
     params:

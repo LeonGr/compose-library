@@ -91,6 +91,14 @@ services:
     networks:
       - grafana
 
+  webdav-usage:
+    image: localhost/webdav-usage
+    container_name: webdav-usage
+    ports:
+      9393:9393
+    networks:
+      - grafana
+
 networks:
   grafana:
     external: false
