@@ -67,7 +67,8 @@ services:
       - grafana
 
   prometheus_podman_exporter:
-    image: quay.io/navidys/prometheus-podman-exporter:v1.3.0
+    # image: quay.io/navidys/prometheus-podman-exporter:v1.3.0
+    image: localhost/prometheus-podman-exporter-fork
     container_name: grafana-prometheus-podman-exporter
     environment:
       - CONTAINER_HOST=unix:///run/podman/podman.sock
