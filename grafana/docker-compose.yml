@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+  grafana:
+    image: docker.io/grafana/grafana-oss:9.4.3
+    container_name: grafana
+    environment:
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    ports:
+      - 3000:3000
+    networks:
+      - grafana
+
   loki:
     image: docker.io/grafana/loki:2.7.4
     container_name: grafana-loki
@@ -79,18 +91,6 @@ services:
     userns:
       - keep-id
     user: "1000"
-
-  grafana:
-    image: docker.io/grafana/grafana-oss:9.4.3
-    container_name: grafana
-    environment:
-      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    ports:
-      - 3000:3000
-    networks:
-      - grafana
 
   webdav-usage:
     image: localhost/webdav-usage
