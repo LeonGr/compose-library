@@ -43,6 +43,7 @@ services:
       - NET_ADMIN
     volumes:
       - ~/Media/media-stack:/data
+      - ./transmission:/etc/openvpn/custom
     environment:
       - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
       - OPENVPN_CONFIG=${OPENVPN_CONFIG}
