@@ -24,7 +24,7 @@ services:
       - nextcloud
 
   nextcloud:
-    image: docker.io/library/nextcloud:25.0.4-apache
+    image: docker.io/library/nextcloud:26.0.0-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
