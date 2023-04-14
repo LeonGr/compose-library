@@ -34,7 +34,7 @@ services:
     user: 1001:1001
 
   transmission-openvpn:
-    image: docker.io/haugene/transmission-openvpn:4.3.2
+    image: docker.io/haugene/transmission-openvpn:beta
     container_name: media-transmission-openvpn
     mem_limit: 2g
     memswap_limit: 4g
@@ -94,7 +94,7 @@ services:
       - 7878:7878
 
   sonarr:
-    image: docker.io/linuxserver/sonarr:3.0.9
+    image: docker.io/linuxserver/sonarr:3.0.10
     container_name: media-sonarr
     restart: unless-stopped
     environment:
@@ -111,7 +111,7 @@ services:
       - 8989:8989
 
   jackett:
-    image: docker.io/linuxserver/jackett:0.20.3063
+    image: docker.io/linuxserver/jackett:0.20.3903
     container_name: media-jackett
     restart: unless-stopped
     environment:
@@ -125,7 +125,7 @@ services:
       - 9117:9117
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.1.4
+    image: docker.io/linuxserver/bazarr:1.2.0
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -158,7 +158,7 @@ services:
       - 8686:8686
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.1.3
+    image: docker.io/linuxserver/prowlarr:1.2.2
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
