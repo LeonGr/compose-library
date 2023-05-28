@@ -10,7 +10,7 @@ services:
     volumes:
       - ~/Media/media-stack:/media
       - ./jellyfin/config:/config
-      - ./jellyfin/cache:/cache
+      - ~/Media/media-stack/jellyfin/cache:/cache
     group_add:
       - "video"
     devices:
