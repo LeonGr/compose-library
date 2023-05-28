@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: docker.io/library/postgres:15.2
+    image: docker.io/library/postgres:15.3
     container_name: nextcloud-postgres
     restart: unless-stopped
     environment:
@@ -15,7 +15,7 @@ services:
       - nextcloud
 
   redis:
-    image: docker.io/library/redis:7.0.9
+    image: docker.io/library/redis:7.0.11
     container_name: nextcloud-redis
     restart: unless-stopped
     volumes:
@@ -24,7 +24,7 @@ services:
       - nextcloud
 
   nextcloud:
-    image: docker.io/library/nextcloud:26.0.0-apache
+    image: docker.io/library/nextcloud:26.0.1-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
