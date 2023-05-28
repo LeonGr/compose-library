@@ -3,7 +3,7 @@
 version: '3.4'
 services:
   miniflux:
-    image: docker.io/miniflux/miniflux:2.0.43
+    image: docker.io/miniflux/miniflux:2.0.44
     container_name: miniflux
     restart: unless-stopped
     ports:
@@ -18,7 +18,7 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
 
   db:
-    image: docker.io/library/postgres:15.2
+    image: docker.io/library/postgres:15.3
     container_name: miniflux-postgres
     restart: unless-stopped
     environment:
