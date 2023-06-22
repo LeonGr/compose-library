@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  syncyomi:
+    container_name: syncyomi
+    image: ghcr.io/syncyomi/syncyomi:v0.2.3
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    # user: 1000:1000
+    volumes:
+      - ./syncyomi/config:/config
+    ports:
+      - 8282:8282
