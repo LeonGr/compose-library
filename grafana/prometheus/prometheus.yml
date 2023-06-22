@@ -19,9 +19,10 @@ scrape_configs:
     static_configs:
     - targets: ["prometheus_podman_exporter:9882"]
 
-  - job_name: "webdav-usage"
+  - job_name: "cloud-storage-usage"
+    scrape_interval: 1m
     static_configs:
-      - targets: ["webdav-usage:9393"]
+      - targets: ["cloud-storage-usage:9393"]
 
   - job_name: "nginx-prometheus-exporter"
     static_configs:

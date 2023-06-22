@@ -92,9 +92,9 @@ services:
       - keep-id
     user: "1000"
 
-  webdav-usage:
-    image: localhost/webdav-usage
-    container_name: webdav-usage
+  cloud-storage-usage:
+    image: localhost/cloud-storage-usage
+    container_name: cloud-storage-usage
     ports:
       9393:9393
     networks:
