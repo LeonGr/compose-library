@@ -1,0 +1,41 @@
+version: "3.5"
+
+services:
+  diun_app:
+    image: docker.io/crazymax/diun:4.25.0
+    container_name: diun
+    hostname: "${HOSTNAME}"
+    restart: unless-stopped
+    volumes:
+      - "./data:/data"
+      # root mode
+      # - "/run/podman/podman.sock:/var/run/docker.sock"
+      # rootless mode
+      - "$XDG_RUNTIME_DIR/podman/podman.sock:/var/run/docker.sock"
+      #- "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+    environment:
+      - "TZ=Europe/Amsterdam"
+      # - "LOG_LEVEL=debug"
+      - "LOG_JSON=false"
+      - "DIUN_WATCH_WORKERS=10"
+      - "DIUN_WATCH_SCHEDULE=0 */1 * * *"
+      - "DIUN_WATCH_JITTER=30s"
+      - "DIUN_PROVIDERS_DOCKER=true"
+      - "DIUN_NOTIF_DISCORD_WEBHOOKURL=${DISCORD_WEBHOOKURL}"
+      # - "DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true"
+      # - "DIUN_REGOPTS_0_NAME=${REGISTRY_NAME}"
+      # - "DIUN_REGOPTS_0_USERNAME=${REGISTRY_USERNAME}"
+      # - "DIUN_REGOPTS_0_PASSWORD=${REGISTRY_PASSWORD}"
+      # selector will retrieve this registry options if the given image matches the registry domain or repository path.
+      # - "DIUN_REGOPTS_0_SELECTOR=image"
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true

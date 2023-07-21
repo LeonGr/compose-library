@@ -38,6 +38,17 @@ services:
     restart: unless-stopped
     networks:
       - paperless
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   db:
     image: docker.io/library/postgres:15.3
@@ -51,6 +62,17 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - paperless
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   webserver:
     image: docker.io/jonaswinkler/paperless-ng:1.5.0
@@ -82,6 +104,17 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
     networks:
       - paperless
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   gotenberg:
     image: docker.io/thecodingmachine/gotenberg:7.8.3
@@ -91,6 +124,17 @@ services:
       DISABLE_GOOGLE_CHROME: 1
     networks:
       - paperless
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   tika:
     image: docker.io/apache/tika:2.8.0.0-full
@@ -98,6 +142,17 @@ services:
     restart: unless-stopped
     networks:
       - paperless
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+\.\d+-full$
+      # enable diun
+      - diun.enable=true
 
 volumes:
   data:

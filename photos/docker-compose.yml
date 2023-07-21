@@ -85,6 +85,17 @@ services:
     volumes:
       - ~/.local/share/containers/storage/volumes/nextcloud/_data/data/admin/files:/photoprism/originals:ro
       - "~/Media/photos/storage:/photoprism/storage"
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=lexicographical
+      # regular expression to filter tags
+      - diun.include_tags=^\d+-$
+      # enable diun
+      - diun.enable=true
 
   mariadb:
     image: docker.io/library/mariadb:10.11.2
@@ -103,6 +114,17 @@ services:
       MARIADB_USER: "photoprism"
       MARIADB_PASSWORD: ${PHOTOPRISM_DATABASE_PASSWORD}
       MARIADB_ROOT_PASSWORD: ${PHOTOPRISM_MARIADB_ROOT_PASSWORD}
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
 volumes:
   db_data:

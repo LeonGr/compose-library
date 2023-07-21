@@ -18,6 +18,18 @@ services:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
     user: 1001:1001
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
+
 
   navidrome:
     image: docker.io/deluan/navidrome:0.49.3
@@ -32,6 +44,17 @@ services:
     ports:
       - "4533:4533"
     user: 1001:1001
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   transmission-openvpn:
     image: docker.io/haugene/transmission-openvpn:5.0.2
@@ -60,6 +83,17 @@ services:
       - 9091:9091
     devices:
       - /dev/net/tun:/dev/net/tun
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   # nzbget:
     # image: docker.io/linuxserver/nzbget:version-v21.1
@@ -92,6 +126,17 @@ services:
       - ~/Media/media-stack/completed:/data/completed
     ports:
       - 7878:7878
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   sonarr:
     image: docker.io/linuxserver/sonarr:3.0.10
@@ -109,6 +154,17 @@ services:
       - ~/Media/media-stack/completed:/data/completed
     ports:
       - 8989:8989
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   jackett:
     image: docker.io/linuxserver/jackett:0.21.64
@@ -123,6 +179,17 @@ services:
       - ~/Media/media-stack/downloads:/downloads
     ports:
       - 9117:9117
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   bazarr:
     image: docker.io/linuxserver/bazarr:1.2.1
@@ -140,6 +207,17 @@ services:
       - ~/Media/media-stack/completed:/data/completed
     ports:
       - 6767:6767
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   lidarr:
     image: docker.io/linuxserver/lidarr:1.1.4
@@ -156,6 +234,17 @@ services:
       - ~/Media/media-stack/completed:/data/completed
     ports:
       - 8686:8686
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   prowlarr:
     image: docker.io/linuxserver/prowlarr:1.4.1
@@ -169,3 +258,14 @@ services:
       - ./prowlarr:/config
     ports:
       - 9696:9696
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
