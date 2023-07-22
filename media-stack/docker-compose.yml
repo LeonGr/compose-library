@@ -167,7 +167,7 @@ services:
       - diun.enable=true
 
   jackett:
-    image: docker.io/linuxserver/jackett:0.21.64
+    image: docker.io/linuxserver/jackett:0.21.510
     container_name: media-jackett
     restart: unless-stopped
     environment:
