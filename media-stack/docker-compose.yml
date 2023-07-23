@@ -192,7 +192,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.2.1
+    image: docker.io/linuxserver/bazarr:1.2.4
     container_name: media-bazarr
     restart: unless-stopped
     environment:
