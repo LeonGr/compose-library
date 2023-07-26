@@ -4,6 +4,7 @@ import subprocess
 from dotenv import load_dotenv
 import os
 import json
+import logging
 
 PORT = 9393
 
@@ -39,9 +40,13 @@ def get_storagebox_space_used(storagebox_url, username, password):
               """, shell=True)
 
     raw_json = response.decode().strip()
-    parsed = json.loads(raw_json)
-    storagebox = parsed["storagebox"]
-    usage = storagebox["disk_usage"]
+    try:
+        parsed = json.loads(raw_json)
+        storagebox = parsed["storagebox"]
+        usage = storagebox["disk_usage"]
+    except Exception as ex:
+        logging.warning(f"Could not get storagebox output, received:\n{raw_json}")
+        raise
 
     return usage
 
@@ -84,7 +89,9 @@ storagebox_total_used {storagebox_usage}
 
         self.wfile.write(bytes(message, "utf8"))
 
-httpd = socketserver.TCPServer(("", PORT), PrometheusMetricsHandler)
-print("serving at port", PORT)
+if __name__ == "__main__":
+    httpd = socketserver.TCPServer(("", PORT), PrometheusMetricsHandler)
+    logging.basicConfig(level=logging.DEBUG)
+    logging.info(f"serving at port {PORT}")
 
-httpd.serve_forever()
+    httpd.serve_forever()
