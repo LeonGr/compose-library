@@ -166,31 +166,6 @@ services:
       # enable diun
       - diun.enable=true
 
-  jackett:
-    image: docker.io/linuxserver/jackett:0.21.510
-    container_name: media-jackett
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=1001
-      - TZ=Europe/Amsterdam
-    volumes:
-      - ./jackett:/config
-      - ~/Media/media-stack/downloads:/downloads
-    ports:
-      - 9117:9117
-    labels:
-      # watch all tags
-      - diun.watch_repo=true
-      # maximum number of tags to watch
-      - diun.max_tags=3
-      # sort by semantical versioning order
-      - diun.sort_tags=semver
-      # regular expression to filter tags
-      - diun.include_tags=^\d+\.\d+\.\d+$
-      # enable diun
-      - diun.enable=true
-
   bazarr:
     image: docker.io/linuxserver/bazarr:1.2.4
     container_name: media-bazarr
