@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:9.5.2
+    image: docker.io/grafana/grafana-oss:10.0.3
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -61,7 +61,7 @@ services:
       # - grafana
 
   prometheus:
-    image: docker.io/prom/prometheus:v2.44.0
+    image: docker.io/prom/prometheus:v2.46.0
     container_name: grafana-prometheus
     restart: unless-stopped
     ports:
