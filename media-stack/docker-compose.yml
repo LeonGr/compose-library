@@ -111,7 +111,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:4.5.2
+    image: docker.io/linuxserver/radarr:4.7.5
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -195,7 +195,7 @@ services:
       - diun.enable=true
 
   lidarr:
-    image: docker.io/linuxserver/lidarr:1.1.4
+    image: docker.io/linuxserver/lidarr:1.3.5
     container_name: media-lidarr
     restart: unless-stopped
     environment:
