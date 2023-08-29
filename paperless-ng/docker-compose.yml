@@ -33,7 +33,7 @@
 version: "3.4"
 services:
   broker:
-    image: docker.io/library/redis:7.0.11
+    image: docker.io/library/redis:7.2.0
     container_name: paperless-redis
     restart: unless-stopped
     networks:
@@ -51,7 +51,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:15.3
+    image: docker.io/library/postgres:15.4
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
