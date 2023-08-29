@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:10.0.3
+    image: docker.io/grafana/grafana-oss:10.1.0
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -25,7 +25,7 @@ services:
       - diun.enable=true
 
   loki:
-    image: docker.io/grafana/loki:2.8.3
+    image: docker.io/grafana/loki:2.8.4
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     ports:
