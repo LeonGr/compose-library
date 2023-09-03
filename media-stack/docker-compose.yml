@@ -244,3 +244,30 @@ services:
       - diun.include_tags=^amd64-\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
+
+  readarr:
+    image: docker.io/linuxserver/readarr:amd64-0.2.4-develop
+    container_name: media-readarr
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./readarr:/config
+      - ~/Media/media-stack/books:/books
+      - ~/Media/media-stack/downloads:/downloads
+      - ~/Media/media-stack/completed:/data/completed
+    ports:
+      - 8787:8787
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^amd64-\d+\.\d+\.\d+-develop$
+      # enable diun
+      - diun.enable=true
