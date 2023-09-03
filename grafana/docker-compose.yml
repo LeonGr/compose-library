@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:10.1.0
+    image: docker.io/grafana/grafana-oss:10.1.1
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -84,7 +84,7 @@ services:
       - diun.enable=true
 
   node-exporter:
-    image: docker.io/prom/node-exporter:v1.6.0
+    image: docker.io/prom/node-exporter:v1.6.1
     container_name: grafana-node-exporter
     restart: unless-stopped
     volumes:
