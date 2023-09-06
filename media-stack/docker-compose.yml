@@ -57,7 +57,7 @@ services:
       - diun.enable=true
 
   transmission-openvpn:
-    image: docker.io/haugene/transmission-openvpn:5.1.0
+    image: docker.io/haugene/transmission-openvpn:5.2.0
     container_name: media-transmission-openvpn
     mem_limit: 2g
     memswap_limit: 4g
