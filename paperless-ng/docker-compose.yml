@@ -33,7 +33,7 @@
 version: "3.4"
 services:
   broker:
-    image: docker.io/library/redis:7.2.0
+    image: docker.io/library/redis:7.2.1
     container_name: paperless-redis
     restart: unless-stopped
     networks:
