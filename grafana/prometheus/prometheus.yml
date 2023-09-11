@@ -24,9 +24,13 @@ scrape_configs:
     static_configs:
       - targets: ["cloud-storage-usage:9393"]
 
-  - job_name: "nginx-prometheus-exporter"
+  - job_name: "nginx-prometheus-exporter-leda"
     static_configs:
-      - targets: ["grafana-nginx-prometheus-exporter:9113"]
+      - targets: ["grafana-nginx-prometheus-exporter-leda:9113"]
+
+  - job_name: "nginx-prometheus-exporter-callisto"
+    static_configs:
+      - targets: ["grafana-nginx-prometheus-exporter-callisto:9114"]
 
   - job_name: "blackbox"
     metrics_path: /probe
