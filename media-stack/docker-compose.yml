@@ -271,3 +271,45 @@ services:
       - diun.include_tags=^amd64-\d+\.\d+\.\d+-develop$
       # enable diun
       - diun.enable=true
+
+  tdarr:
+    image: ghcr.io/haveagitgat/tdarr:2.11.01
+    container_name: media-tdarr
+    restart: unless-stopped
+    ports:
+      - 8265:8265 # webUI port
+      - 8266:8266 # server port
+    environment:
+      - TZ=Europe/Amsterdam
+      - PUID=1001
+      - PGID=1001
+      - UMASK_SET=002
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+      - internalNode=true
+      - inContainer=true
+      - nodeName=tdarr-node
+    volumes:
+      - ./tdarr/server:/app/server
+      - ./tdarr/configs:/app/configs
+      - ./tdarr/logs:/app/logs
+      - ~/Media/media-stack/:/media
+      - ~/Media/tdarr/cache/:/temp
+    group_add:
+      - "video"
+    devices:
+      # VAAPI Devices
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
