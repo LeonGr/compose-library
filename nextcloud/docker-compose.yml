@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: docker.io/library/postgres:15.4
+    image: docker.io/library/postgres:16.0
     container_name: nextcloud-postgres
     restart: unless-stopped
     environment:
@@ -47,7 +47,7 @@ services:
       - diun.enable=true
 
   nextcloud:
-    image: docker.io/library/nextcloud:27.0.2-apache
+    image: docker.io/library/nextcloud:27.1.1-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
