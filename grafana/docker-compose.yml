@@ -66,10 +66,12 @@ services:
     image: docker.io/prom/prometheus:v2.47.0
     container_name: grafana-prometheus
     restart: unless-stopped
+    command:
+      - '--storage.tsdb.retention.time=30d'
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     networks:
       - grafana
