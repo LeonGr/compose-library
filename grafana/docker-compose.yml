@@ -49,16 +49,18 @@ services:
     # - change default logging driver:
     # https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#change-the-default-logging-driver
 
-  # promtail:
-    # image: docker.io/grafana/promtail:2.7.4
-    # container_name: grafana-promtail
-    # volumes:
-      # - /var/log:/var/log
-      # - ./promtail:/etc/promtail
+  promtail:
+    image: docker.io/grafana/promtail:2.9.1
+    container_name: grafana-promtail
+    volumes:
+      - /var/log:/var/log
+      - /run/log/journal:/run/log/journal
+      - /etc/machine-id:/etc/machine-id
+      - ./promtail:/etc/promtail
       # - /var/lib/docker/containers:/var/lib/docker/containers:ro
-    # command: -config.file=/etc/promtail/config.yml
-    # networks:
-      # - grafana
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - grafana
 
   prometheus:
     image: docker.io/prom/prometheus:v2.47.0
