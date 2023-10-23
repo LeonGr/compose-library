@@ -69,7 +69,7 @@ services:
     command:
       - '--storage.tsdb.retention.time=30d'
     ports:
-      - "9090:9090"
+      - "9152:9090"
     volumes:
       - ./prometheus/prometheus.yml:/prometheus/prometheus.yml
       - prometheus_data:/prometheus
