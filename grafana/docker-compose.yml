@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:10.1.5
+    image: docker.io/grafana/grafana-oss:10.2.2
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -63,7 +63,7 @@ services:
       - grafana
 
   prometheus:
-    image: docker.io/prom/prometheus:v2.47.2
+    image: docker.io/prom/prometheus:v2.48.0
     container_name: grafana-prometheus
     restart: unless-stopped
     command:
@@ -88,7 +88,7 @@ services:
       - diun.enable=true
 
   node-exporter:
-    image: docker.io/prom/node-exporter:v1.6.1
+    image: docker.io/prom/node-exporter:v1.7.0
     container_name: grafana-node-exporter
     restart: unless-stopped
     volumes:
