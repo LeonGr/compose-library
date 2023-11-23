@@ -98,7 +98,7 @@ services:
       - diun.enable=true
 
   mariadb:
-    image: docker.io/library/mariadb:11.1.2
+    image: docker.io/library/mariadb:11.1.3
     container_name: photos-photoprism-mariadb
     restart: unless-stopped
     security_opt:
