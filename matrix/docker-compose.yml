@@ -3,7 +3,7 @@ version: '3'
 services:
 
   synapse:
-    image: docker.io/matrixdotorg/synapse:v1.94.0
+    image: docker.io/matrixdotorg/synapse:v1.96.1
     container_name: matrix-synapse
     restart: unless-stopped
     build:
@@ -32,7 +32,7 @@ services:
       - grafana
 
   db:
-    image: docker.io/library/postgres:16.0
+    image: docker.io/library/postgres:16.1
     container_name: matrix-postgres
     environment:
       - POSTGRES_USER=synapse
