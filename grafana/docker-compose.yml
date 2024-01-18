@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:10.2.2
+    image: docker.io/grafana/grafana-oss:10.2.3
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -25,7 +25,7 @@ services:
       - diun.enable=true
 
   loki:
-    image: docker.io/grafana/loki:2.9.2
+    image: docker.io/grafana/loki:2.9.3
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     ports:
@@ -63,7 +63,7 @@ services:
       - grafana
 
   prometheus:
-    image: docker.io/prom/prometheus:v2.48.0
+    image: docker.io/prom/prometheus:v2.49.1
     container_name: grafana-prometheus
     restart: unless-stopped
     command:
@@ -160,7 +160,7 @@ services:
       - grafana
 
   grafana-nginx-prometheus-exporter-leda:
-    image: docker.io/nginx/nginx-prometheus-exporter:0.11
+    image: docker.io/nginx/nginx-prometheus-exporter:1.1
     container_name: grafana-nginx-prometheus-exporter-leda
     command: -nginx.scrape-uri=http://100.87.106.110:8080/stub_status
     ports:
@@ -180,7 +180,7 @@ services:
       - diun.enable=true
 
   grafana-nginx-prometheus-exporter-callisto:
-    image: docker.io/nginx/nginx-prometheus-exporter:0.11
+    image: docker.io/nginx/nginx-prometheus-exporter:1.1
     container_name: grafana-nginx-prometheus-exporter-callisto
     command: -nginx.scrape-uri=http://nginx:8080/stub_status -web.listen-address=:9114
     ports:
