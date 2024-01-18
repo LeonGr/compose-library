@@ -3,7 +3,7 @@
 version: '3.4'
 services:
   miniflux:
-    image: docker.io/miniflux/miniflux:2.0.50
+    image: docker.io/miniflux/miniflux:2.0.51
     container_name: miniflux
     restart: unless-stopped
     ports:
