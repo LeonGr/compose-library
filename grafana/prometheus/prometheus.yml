@@ -15,6 +15,10 @@ scrape_configs:
     static_configs:
     - targets: ["100.87.106.110:9100"]
 
+  - job_name: "jupiter"
+    static_configs:
+      - targets: ["192.168.3.11:9100"]
+
   - job_name: "prometheus-podman-exporter"
     static_configs:
     - targets: ["prometheus_podman_exporter:9882"]
