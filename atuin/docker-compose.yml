@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  atuin:
+    restart: always
+    container_name: atuin
+    image: ghcr.io/atuinsh/atuin:v17.2.1
+    command: server start
+    volumes:
+      - "./config:/config"
+    links:
+      - postgresql:db
+    ports:
+      - 8888:8888
+    environment:
+      ATUIN_HOST: "0.0.0.0"
+      ATUIN_OPEN_REGISTRATION: "true"
+      ATUIN_DB_URI: postgres://$ATUIN_DB_USERNAME:$ATUIN_DB_PASSWORD@atuin-postgres/atuin
+
+  postgresql:
+    container_name: atuin-postgres
+    image: docker.io/library/postgres:16.1
+    restart: unless-stopped
+    volumes:
+      - "./database:/var/lib/postgresql/data/"
+    environment:
+      POSTGRES_USER: $ATUIN_DB_USERNAME
+      POSTGRES_PASSWORD: $ATUIN_DB_PASSWORD
+      POSTGRES_DB: atuin
