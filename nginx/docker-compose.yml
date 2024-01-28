@@ -8,6 +8,7 @@ services:
     volumes:
       - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./config/reverse-proxy-http.conf:/etc/nginx/sites-enabled/reverse-proxy.conf
+      - ./config/local-http.conf:/etc/nginx/sites-enabled/local-http.conf
       - ./config/reverse-proxy-misc.conf:/etc/nginx/other-enabled/reverse-proxy.conf
       - ./letsencrypt/:/etc/letsencrypt/:ro
     ports:
