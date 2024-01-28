@@ -1,2 +1,4 @@
 config/
 letsencrypt/
+self_signed/*
+!self_signed/gen_signed_cert.sh

@@ -11,6 +11,7 @@ services:
       - ./config/local-http.conf:/etc/nginx/sites-enabled/local-http.conf
       - ./config/reverse-proxy-misc.conf:/etc/nginx/other-enabled/reverse-proxy.conf
       - ./letsencrypt/:/etc/letsencrypt/:ro
+      - ./self_signed/certificates/:/etc/certificates/:ro
     ports:
       - "80:8080"
       - "443:4430"
