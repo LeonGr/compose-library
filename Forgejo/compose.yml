@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  server:
+    image: codeberg.org/forgejo/forgejo:1.21.5-0
+    restart: unless-stopped
+    container_name: forgejo
+    networks:
+      - forgejo
+    volumes:
+      - ./forgejo:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3300:3000'
+      - '222:22'
+
+networks:
+  forgejo:
+    external: false
