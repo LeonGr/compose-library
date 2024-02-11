@@ -16,6 +16,17 @@ services:
       ATUIN_HOST: "0.0.0.0"
       ATUIN_OPEN_REGISTRATION: "true"
       ATUIN_DB_URI: postgres://$ATUIN_DB_USERNAME:$ATUIN_DB_PASSWORD@atuin-postgres/atuin
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^v\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   postgresql:
     container_name: atuin-postgres
@@ -27,3 +38,14 @@ services:
       POSTGRES_USER: $ATUIN_DB_USERNAME
       POSTGRES_PASSWORD: $ATUIN_DB_PASSWORD
       POSTGRES_DB: atuin
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+$
+      # enable diun
+      - diun.enable=true
