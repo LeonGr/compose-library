@@ -14,7 +14,7 @@ generate_certificate() {
     mkdir -p "./certificates/$CN"
 
     # Generate a private key for the service
-    openssl genpkey -algorithm rsa:4096 -out "./certificates/$CN/$CN.key"
+    openssl genpkey -algorithm RSA -out "./certificates/$CN/$CN.key"
 
     # Generate a CSR for the service
     openssl req -new -key "./certificates/$CN/$CN.key" -out "./certificates/$CN/$CN.csr" -subj "/CN=$CN" --addext "subjectAltName=DNS:$CN"
