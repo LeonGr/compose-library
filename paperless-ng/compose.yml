@@ -51,7 +51,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:16.1
+    image: docker.io/library/postgres:16.2
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
@@ -117,7 +117,7 @@ services:
       - diun.enable=true
 
   gotenberg:
-    image: docker.io/thecodingmachine/gotenberg:8.0.1
+    image: docker.io/thecodingmachine/gotenberg:8.1.0
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
