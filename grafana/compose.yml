@@ -173,7 +173,7 @@ services:
   grafana-nginx-prometheus-exporter-leda:
     image: docker.io/nginx/nginx-prometheus-exporter:1.1
     container_name: grafana-nginx-prometheus-exporter-leda
-    command: -nginx.scrape-uri=http://100.87.106.110:8080/stub_status
+    command: -nginx.scrape-uri=http://100.100.187.49:8080/stub_status
     ports:
       9113:9113
     networks:
