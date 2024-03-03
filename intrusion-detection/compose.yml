@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: docker.io/library/elasticsearch:8.12.2
+    container_name: ids-elasticsearch
+    restart: never
+    environment:
+      - discovery.type='single-node'
+      - xpack.security.enabled='false'
+    volumes:
+      - ./data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - ids
+
+  kibana:
+    image: docker.io/library/kibana:8.12.2
+    container_name: ids-kibana
+    restart: unless-stopped
+    environment:
+      - output.elasticsearch.hosts=["http://elasticsearch:9200"]
+      - xpack.reporting.encryptionKey=${ENCRYPTION_KEY}
+      - xpack.security.encryptionKey=${ENCRYPTION_KEY}
+    ports:
+      - 5601:5601
+    networks:
+      - ids
+
+  filebeat:
+    image: docker.io/elastic/filebeat:8.12.2
+    container_name: ids-filebeat
+    restart: unless-stopped
+    environment:
+      - output.elasticsearch.hosts=["http://elasticsearch:9200"]
+      - setup.kibana.host=["kibana:5601"]
+    # ports:
+      # - :9200
+    networks:
+      - ids
+
+networks:
+  ids:
+    external: false
+    name: ids
