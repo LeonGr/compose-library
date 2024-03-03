@@ -5,6 +5,10 @@ services:
     image: docker.io/library/elasticsearch:8.12.2
     container_name: ids-elasticsearch
     restart: never
+    # "If --memory-swap is set to the same value as --memory, and --memory is set to a positive integer, the container doesn't have access to swap"
+    # https://docs.docker.com/config/containers/resource_constraints/#prevent-a-container-from-using-swap
+    mem_limit: 8g
+    memswap_limit: 8g
     environment:
       - discovery.type='single-node'
       - xpack.security.enabled='false'
