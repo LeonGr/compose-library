@@ -45,6 +45,16 @@ services:
     networks:
       - ids
 
+  evebox:
+    image: docker.io/jasonish/evebox:latest
+    container_name: ids-evebox
+    restart: unless-stopped
+    ports:
+      - "5636:5636"
+    command: evebox server -e http://elasticsearch:9200 --ecs --index filebeat
+    networks:
+      - ids
+
 networks:
   ids:
     external: false
