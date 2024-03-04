@@ -13,7 +13,7 @@ services:
       - discovery.type='single-node'
       - xpack.security.enabled='false'
     volumes:
-      - ./data:/usr/share/elasticsearch/data
+      - ~/Media/intrusion-detection/data/:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
