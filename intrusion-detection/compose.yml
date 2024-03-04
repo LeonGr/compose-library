@@ -27,6 +27,8 @@ services:
       - output.elasticsearch.hosts=["http://elasticsearch:9200"]
       - xpack.reporting.encryptionKey=${ENCRYPTION_KEY}
       - xpack.security.encryptionKey=${ENCRYPTION_KEY}
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - 5601:5601
     networks:
@@ -36,11 +38,10 @@ services:
     image: docker.io/elastic/filebeat:8.12.2
     container_name: ids-filebeat
     restart: unless-stopped
-    environment:
-      - output.elasticsearch.hosts=["http://elasticsearch:9200"]
-      - setup.kibana.host=["kibana:5601"]
-    # ports:
-      # - :9200
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./filebeat/suricata.yml:/usr/share/filebeat/modules.d/suricata.yml
+      - /var/log/suricata/eve.json:/var/log/suricata/eve.json:ro
     networks:
       - ids
 

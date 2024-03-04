@@ -1,0 +1,5 @@
+# https://www.elastic.co/guide/en/beats/filebeat/8.12/filebeat-module-suricata.html
+- module: suricata
+  eve:
+    enabled: true
+    var.paths: ["/var/log/suricata/eve.json"]
