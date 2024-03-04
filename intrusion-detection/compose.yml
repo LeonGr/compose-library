@@ -51,7 +51,7 @@ services:
     restart: unless-stopped
     ports:
       - "5636:5636"
-    command: evebox server -e http://elasticsearch:9200 --ecs --index filebeat
+    command: evebox server --no-auth -e http://elasticsearch:9200 --ecs --index filebeat
     networks:
       - ids
 
