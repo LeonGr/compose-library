@@ -46,7 +46,7 @@ services:
       - ids
 
   evebox:
-    image: docker.io/jasonish/evebox:latest
+    image: docker.io/jasonish/evebox:0.18.0
     container_name: ids-evebox
     restart: unless-stopped
     ports:
