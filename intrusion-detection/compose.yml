@@ -63,7 +63,7 @@ services:
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./filebeat/suricata.yml:/usr/share/filebeat/modules.d/suricata.yml
-      - /var/log/suricata/eve.json:/var/log/suricata/eve.json:ro
+      - /var/log/suricata/:/var/log/suricata/:ro
     networks:
       - ids
     labels:
