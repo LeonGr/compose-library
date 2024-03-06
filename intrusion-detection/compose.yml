@@ -64,6 +64,7 @@ services:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./filebeat/suricata.yml:/usr/share/filebeat/modules.d/suricata.yml
       - /var/log/suricata/:/var/log/suricata/:ro
+    command: sh -c "/usr/share/filebeat/filebeat setup && /usr/share/filebeat/filebeat -e"
     networks:
       - ids
     labels:
