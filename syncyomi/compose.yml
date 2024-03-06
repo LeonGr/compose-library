@@ -3,7 +3,7 @@ version: "3.9"
 services:
   syncyomi:
     container_name: syncyomi
-    image: ghcr.io/syncyomi/syncyomi:v0.3.7
+    image: ghcr.io/syncyomi/syncyomi:v0.3.8
     restart: unless-stopped
     environment:
       - TZ=${TZ}
