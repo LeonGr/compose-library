@@ -111,7 +111,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:amd64-5.2.6
+    image: docker.io/linuxserver/radarr:5.2.6
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -134,12 +134,12 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^amd64-\d+\.\d+\.\d+$
+      - diun.include_tags=^\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
 
   sonarr:
-    image: docker.io/linuxserver/sonarr:amd64-4.0.0
+    image: docker.io/linuxserver/sonarr:4.0.0
     container_name: media-sonarr
     restart: unless-stopped
     environment:
@@ -162,12 +162,12 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^amd64-\d+\.\d+\.\d+$
+      - diun.include_tags=^\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:amd64-1.4.0
+    image: docker.io/linuxserver/bazarr:1.4.0
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -190,12 +190,12 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^amd64-\d+\.\d+\.\d+$
+      - diun.include_tags=^\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
 
   lidarr:
-    image: docker.io/linuxserver/lidarr:amd64-2.0.7
+    image: docker.io/linuxserver/lidarr:2.0.7
     container_name: media-lidarr
     restart: unless-stopped
     environment:
@@ -217,12 +217,12 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^amd64-\d+\.\d+\.\d+$
+      - diun.include_tags=^\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:amd64-1.12.2
+    image: docker.io/linuxserver/prowlarr:1.12.2
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -241,12 +241,12 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^amd64-\d+\.\d+\.\d+$
+      - diun.include_tags=^\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:amd64-0.3.14-develop
+    image: docker.io/linuxserver/readarr:0.3.14-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
@@ -268,7 +268,7 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^amd64-\d+\.\d+\.\d+-develop$
+      - diun.include_tags=^\d+\.\d+\.\d+-develop$
       # enable diun
       - diun.enable=true
 
