@@ -69,3 +69,7 @@ scrape_configs:
   - job_name: "pihole-exporter"
     static_configs:
       - targets: ["192.168.3.9:9617"]
+
+  - job_name: "bind-exporter"
+    static_configs:
+      - targets: ["grafana-bind-exporter:9119"]
