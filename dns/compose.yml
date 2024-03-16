@@ -5,6 +5,8 @@ services:
     image: docker.io/ubuntu/bind9:9.18-22.04_beta
     container_name: dns-bind
     restart: unless-stopped
+    networks:
+      - grafana
     volumes:
       - ~/Media/dns/cache:/var/cache/bind
       - ~/Media/dns/log:/var/log
@@ -25,3 +27,8 @@ services:
       - diun.include_tags=^9.*$
       # enable diun
       - diun.enable=true
+
+networks:
+  grafana:
+    external: true
+    name: grafana
