@@ -18,6 +18,7 @@ services:
       - 9200:9200
     networks:
       - ids
+      - grafana
     labels:
       # watch all tags
       - diun.watch_repo=true
@@ -105,3 +106,7 @@ networks:
   ids:
     external: false
     name: ids
+
+  grafana:
+    external: true
+    name: grafana
