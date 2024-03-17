@@ -59,6 +59,7 @@ services:
   filebeat:
     image: docker.io/elastic/filebeat:8.12.2
     container_name: ids-filebeat
+    hostname: filebeat-callisto
     restart: unless-stopped
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
