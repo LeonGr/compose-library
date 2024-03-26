@@ -11,6 +11,7 @@ services:
       - ~/Media/media-stack:/media
       - ./jellyfin/config:/config
       - ~/Media/media-stack/jellyfin/cache:/cache
+      - ~/Media/media-stack/jellyfin/transcodes:/transcodes
     group_add:
       - "video"
     devices:
