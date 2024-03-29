@@ -149,18 +149,16 @@ services:
       - diun.enable=true
 
   prometheus_podman_exporter:
-    # image: quay.io/navidys/prometheus-podman-exporter:v1.3.0
-    image: localhost/prometheus-podman-exporter-fork
+    image: quay.io/navidys/prometheus-podman-exporter:v1.11.0
     container_name: grafana-prometheus-podman-exporter
+    command: --collector.enhance-metrics
     environment:
       - CONTAINER_HOST=unix:///run/podman/podman.sock
     volumes:
       - $XDG_RUNTIME_DIR/podman/podman.sock:/run/podman/podman.sock
     security_opt:
       - label=disable
-    userns:
-      - keep-id
-    user: "1000"
+    userns_mode: keep-id:uid=65534
 
   cloud-storage-usage:
     image: localhost/cloud-storage-usage
