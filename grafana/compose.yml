@@ -159,6 +159,17 @@ services:
     security_opt:
       - label=disable
     userns_mode: keep-id:uid=65534
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^v\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
 
   cloud-storage-usage:
     image: localhost/cloud-storage-usage
