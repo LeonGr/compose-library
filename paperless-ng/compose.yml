@@ -117,7 +117,7 @@ services:
       - diun.enable=true
 
   gotenberg:
-    image: docker.io/thecodingmachine/gotenberg:8.2.2
+    image: docker.io/thecodingmachine/gotenberg:8.4.0
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
