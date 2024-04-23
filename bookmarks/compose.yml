@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  postgres:
+    image: docker.io/library/postgres:16.2
+    container_name: bookmarks-linkwarden-postgres
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  linkwarden:
+    image: ghcr.io/linkwarden/linkwarden:v2.5.1
+    container_name: bookmarks-linkwarden
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+    ports:
+      - 3002:3000
+    volumes:
+      - ./data:/data/data
+    depends_on:
+      - postgres
