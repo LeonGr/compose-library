@@ -149,7 +149,7 @@ services:
       - diun.enable=true
 
   prometheus_podman_exporter:
-    image: quay.io/navidys/prometheus-podman-exporter:v1.11.0
+    image: quay.io/navidys/prometheus-podman-exporter:v1.11.1
     container_name: grafana-prometheus-podman-exporter
     command: --collector.enhance-metrics
     environment:
