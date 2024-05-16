@@ -159,6 +159,8 @@ services:
     security_opt:
       - label=disable
     userns_mode: keep-id:uid=65534
+    networks:
+      - grafana
     labels:
       # watch all tags
       - diun.watch_repo=true
