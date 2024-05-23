@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   postgres:
-    image: docker.io/library/postgres:16.2
+    image: docker.io/library/postgres:16.3
     container_name: bookmarks-linkwarden-postgres
     restart: unless-stopped
     env_file: .env
