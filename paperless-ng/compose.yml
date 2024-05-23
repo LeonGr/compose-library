@@ -33,7 +33,7 @@
 version: "3.4"
 services:
   broker:
-    image: docker.io/library/redis:7.2.4
+    image: docker.io/library/redis:7.2.5
     container_name: paperless-redis
     restart: unless-stopped
     networks:
@@ -51,7 +51,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:16.2
+    image: docker.io/library/postgres:16.3
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
@@ -117,7 +117,7 @@ services:
       - diun.enable=true
 
   gotenberg:
-    image: docker.io/thecodingmachine/gotenberg:8.4.0
+    image: docker.io/thecodingmachine/gotenberg:8.5.1
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
