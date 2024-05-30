@@ -8,10 +8,12 @@ import logging
 
 PORT = 9393
 
+
 def get_env(name):
     load_dotenv()
 
     return os.getenv(name)
+
 
 def get_webdav_space_used(webdav_url, username, password):
     xml_data = """
@@ -34,6 +36,7 @@ def get_webdav_space_used(webdav_url, username, password):
     usage = response.decode().strip()
     return usage
 
+
 def get_storagebox_space_used(storagebox_url, username, password):
     response = subprocess.check_output(f"""
         curl --silent --user '{username}:{password}' {storagebox_url} --max-time 10
@@ -44,11 +47,12 @@ def get_storagebox_space_used(storagebox_url, username, password):
         parsed = json.loads(raw_json)
         storagebox = parsed["storagebox"]
         usage = storagebox["disk_usage"]
-    except Exception as ex:
+    except Exception:
         logging.warning(f"Could not get storagebox output, received:\n{raw_json}")
         raise
 
     return usage
+
 
 class PrometheusMetricsHandler(http.server.BaseHTTPRequestHandler):
     def get_webdav_space_used(self):
@@ -88,6 +92,7 @@ storagebox_total_used {storagebox_usage}
         self.end_headers()
 
         self.wfile.write(bytes(message, "utf8"))
+
 
 if __name__ == "__main__":
     httpd = socketserver.TCPServer(("", PORT), PrometheusMetricsHandler)
