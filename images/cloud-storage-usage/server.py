@@ -78,17 +78,18 @@ storagebox_total_used {storagebox_usage}
     """
 
     def do_GET(self):
+        self.send_response(200)
         if self.path == "/metrics":
             webdav_usage_message = self.get_webdav_space_used()
             storagebox_usage_message = self.get_storagebox_space_used()
             message = f"""{webdav_usage_message}
 {storagebox_usage_message}
     """
+            self.send_header('Content-type', 'text/plain')
         else:
-            message = "Hello World!"
+            message = "cloud-storage-usage: see <a href=\"/metrics\">/metrics</a>"
+            self.send_header('Content-type', 'text/html')
 
-        self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
         self.end_headers()
 
         self.wfile.write(bytes(message, "utf8"))
