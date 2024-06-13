@@ -21,7 +21,7 @@ def get_env(name):
     return os.getenv(name)
 
 
-def get_webdav_usage_info(webdav_url, username, password):
+def get_webdav_usage_info(webdav_url, username, password) -> UsageRecord:
     xml_data = """
 <?xml version="1.0" encoding="UTF-8" ?>
 <D:propfind xmlns:D="DAV:">
@@ -78,34 +78,62 @@ def get_storage_total_free_metric(storage_identifier, amount):
 
 
 def get_metrics_message() -> str:
-    webdav_username = get_env("WEBDAV_USERNAME")
-    webdav_password = get_env("WEBDAV_PASSWORD")
-    webdav_url = get_env("WEBDAV_URL")
+    ok_usage_messages = []
+    ok_free_messages = []
 
-    webdav_usage_info = get_webdav_usage_info(webdav_url, webdav_username, webdav_password)
-    webdav_usage = webdav_usage_info.used_bytes
-    webdav_total = webdav_usage_info.total_bytes
+    try:
+        webdav_username = get_env("WEBDAV_USERNAME")
+        webdav_password = get_env("WEBDAV_PASSWORD")
+        webdav_url = get_env("WEBDAV_URL")
 
-    storagebox_username = get_env("STORAGEBOX_USERNAME")
-    storagebox_password = get_env("STORAGEBOX_PASSWORD")
-    storagebox_url = get_env("STORAGEBOX_URL")
+        webdav_usage_info = get_webdav_usage_info(webdav_url, webdav_username, webdav_password)
 
-    storagebox_usage_info = get_storagebox_usage_info(storagebox_url, storagebox_username, storagebox_password)
-    storagebox_usage = storagebox_usage_info.used_bytes
-    storagebox_total = storagebox_usage_info.total_bytes
+        webdav_usage = webdav_usage_info.used_bytes
+        webdav_total = webdav_usage_info.total_bytes
 
-    webdav_usage_message = get_storage_total_used_metric("webdav", webdav_usage)
-    webdav_free_message = get_storage_total_free_metric("webdav", webdav_total - webdav_usage)
-    storagebox_usage_message = get_storage_total_used_metric("storagebox", storagebox_usage)
-    storagebox_free_message = get_storage_total_free_metric("storagebox", storagebox_total - storagebox_usage)
+        webdav_usage_message = get_storage_total_used_metric("webdav", webdav_usage)
+        webdav_free_message = get_storage_total_free_metric("webdav", webdav_total - webdav_usage)
 
-    return f"""# TYPE cloud_storage_used gauge
-{webdav_usage_message}
-{storagebox_usage_message}
-# TYPE cloud_storage_free gauge
-{storagebox_free_message}
-{webdav_free_message}
-"""
+        ok_usage_messages.append(webdav_usage_message)
+        ok_free_messages.append(webdav_free_message)
+    except Exception as e:
+        logging.error("Could not get webdav_usage_info", exc_info=e)
+
+    try:
+        storagebox_username = get_env("STORAGEBOX_USERNAME")
+        storagebox_password = get_env("STORAGEBOX_PASSWORD")
+        storagebox_url = get_env("STORAGEBOX_URL")
+
+        storagebox_usage_info = get_storagebox_usage_info(
+            storagebox_url, storagebox_username, storagebox_password)
+
+        storagebox_usage = storagebox_usage_info.used_bytes
+        storagebox_total = storagebox_usage_info.total_bytes
+
+        storagebox_usage_message = get_storage_total_used_metric("storagebox", storagebox_usage)
+        storagebox_free_message = get_storage_total_free_metric(
+            "storagebox", storagebox_total - storagebox_usage)
+
+        ok_usage_messages.append(storagebox_usage_message)
+        ok_free_messages.append(storagebox_free_message)
+    except Exception as e:
+        logging.error("Could not get storagebox_usage_info", exc_info=e)
+
+    output_message = ""
+
+    if len(ok_usage_messages) > 0:
+        output_message += "# TYPE cloud_storage_used gauge\n"
+
+        for usage_message in ok_usage_messages:
+            output_message += usage_message + "\n"
+
+    if len(ok_free_messages) > 0:
+        output_message += "# TYPE cloud_storage_free gauge\n"
+
+        for free_message in ok_free_messages:
+            output_message += free_message + "\n"
+
+    return output_message
 
 
 class PrometheusMetricsHandler(http.server.BaseHTTPRequestHandler):
