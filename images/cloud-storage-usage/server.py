@@ -7,6 +7,7 @@ import json
 import logging
 from dataclasses import dataclass
 import xml.etree.ElementTree as ET
+import requests
 
 PORT = 9393
 
@@ -32,16 +33,14 @@ def get_webdav_usage_info(webdav_url, username, password) -> UsageRecord:
 </D:propfind>
     """
 
-    response = subprocess.check_output(f"""
-        curl --silent --user '{username}:{password}' --request PROPFIND {webdav_url} --max-time 10 \
-            --data '{xml_data}' \
-            --header 'Depth: 0'
-        """,
-        shell=True)
+    headers = {
+        'Depth': '0',
+        'Content-Type': 'application/x-www-form-urlencoded',
+    }
 
-    usage_xml = response.decode().strip()
+    response = requests.request('PROPFIND', f'{webdav_url}', headers=headers, data=xml_data, auth=(f'{username}', f'{password}'), timeout=10)
 
-    root = ET.fromstring(usage_xml)
+    root = ET.fromstring(response.text)
     namespaces = {'d': 'DAV:'}
     used_bytes = int(root.find('.//d:quota-used-bytes', namespaces).text)
     available_bytes = int(root.find('.//d:quota-available-bytes', namespaces).text)
@@ -50,24 +49,18 @@ def get_webdav_usage_info(webdav_url, username, password) -> UsageRecord:
 
 
 def get_storagebox_usage_info(storagebox_url, username, password) -> UsageRecord:
-    response = subprocess.check_output(f"""
-        curl --silent --user '{username}:{password}' {storagebox_url} --max-time 10
-              """, shell=True)
+    response = requests.get(f'{storagebox_url}', auth=(f'{username}', f'{password}'), timeout=10)
 
-    raw_json = response.decode().strip()
-    try:
-        parsed = json.loads(raw_json)
+    parsed = response.json()
 
-        storagebox = parsed["storagebox"]
-        usage_megabytes = storagebox["disk_usage"]
-        total_megabytes = storagebox["disk_quota"]
-        total_bytes = total_megabytes * 1000**2
-        usage_bytes = usage_megabytes * 1000**2
+    storagebox = parsed["storagebox"]
+    usage_megabytes = storagebox["disk_usage"]
+    total_megabytes = storagebox["disk_quota"]
 
-        return UsageRecord(total_bytes=total_bytes, used_bytes=usage_bytes)
-    except Exception:
-        logging.warning(f"Could not get storagebox output, received:\n{raw_json}")
-        raise
+    total_bytes = total_megabytes * 1000**2
+    usage_bytes = usage_megabytes * 1000**2
+
+    return UsageRecord(total_bytes=total_bytes, used_bytes=usage_bytes)
 
 
 def get_storage_total_used_metric(storage_identifier, amount):
