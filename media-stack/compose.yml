@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.9.2
+    image: docker.io/jellyfin/jellyfin:10.9.6
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.6.0
+    image: docker.io/linuxserver/radarr:5.7.0
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -141,7 +141,7 @@ services:
       - diun.enable=true
 
   sonarr:
-    image: docker.io/linuxserver/sonarr:4.0.4
+    image: docker.io/linuxserver/sonarr:4.0.5
     container_name: media-sonarr
     restart: unless-stopped
     environment:
@@ -169,7 +169,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.4.2
+    image: docker.io/linuxserver/bazarr:1.4.3
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -224,7 +224,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.17.2
+    image: docker.io/linuxserver/prowlarr:1.19.0
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.3.26-develop
+    image: docker.io/linuxserver/readarr:0.3.28-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
