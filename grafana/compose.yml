@@ -254,3 +254,8 @@ volumes:
   prometheus_data:
     external: true
     name: prometheus_data
+
+# Disable adding contains to pods by default, since it conflicts with userns_mode.
+# See https://github.com/containers/podman-compose/blob/main/docs/Extensions.md#custom-pods-management
+x-podman:
+    in_pod: false
