@@ -47,7 +47,7 @@ services:
       - diun.enable=true
 
   nextcloud:
-    image: docker.io/library/nextcloud:29.0.0-apache
+    image: docker.io/library/nextcloud:29.0.2-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
