@@ -2,7 +2,7 @@ version: '3'
 
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:1.21.11-1
+    image: codeberg.org/forgejo/forgejo:1.21.11-2
     restart: unless-stopped
     container_name: forgejo
     networks:
