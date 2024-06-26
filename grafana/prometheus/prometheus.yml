@@ -36,6 +36,10 @@ scrape_configs:
     static_configs:
       - targets: ["100.100.187.49:9113"]
 
+  - job_name: "nginx-prometheus-exporter-dia"
+    static_configs:
+      - targets: ["100.75.159.26:9113"]
+
   - job_name: "nginx-prometheus-exporter-callisto"
     static_configs:
       - targets: ["grafana-nginx-prometheus-exporter-callisto:9114"]
