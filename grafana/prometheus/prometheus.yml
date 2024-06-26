@@ -34,7 +34,7 @@ scrape_configs:
 
   - job_name: "nginx-prometheus-exporter-leda"
     static_configs:
-      - targets: ["grafana-nginx-prometheus-exporter-leda:9113"]
+      - targets: ["100.100.187.49:9113"]
 
   - job_name: "nginx-prometheus-exporter-callisto"
     static_configs:
