@@ -80,7 +80,7 @@ services:
     container_name: grafana-prometheus
     restart: unless-stopped
     command:
-      - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.time=90d'
     ports:
       - "9152:9090"
     volumes:
