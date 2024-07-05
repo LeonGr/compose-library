@@ -28,6 +28,8 @@ services:
     image: docker.io/grafana/loki:2.9.8
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ~/Media/loki/:/loki
     ports:
       - "3100:3100"
     networks:
