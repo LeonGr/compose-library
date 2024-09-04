@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:11.0.1
+    image: docker.io/grafana/grafana-oss:11.2.0
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -25,7 +25,7 @@ services:
       - diun.enable=true
 
   loki:
-    image: docker.io/grafana/loki:2.9.9
+    image: docker.io/grafana/loki:3.0.1
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
@@ -52,7 +52,7 @@ services:
     # https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#change-the-default-logging-driver
 
   promtail:
-    image: docker.io/grafana/promtail:2.9.9
+    image: docker.io/grafana/promtail:3.0.1
     container_name: grafana-promtail
     volumes:
       - /var/log:/var/log
@@ -76,7 +76,7 @@ services:
       - diun.enable=true
 
   prometheus:
-    image: docker.io/prom/prometheus:v2.53.1
+    image: docker.io/prom/prometheus:v2.54.1
     container_name: grafana-prometheus
     restart: unless-stopped
     command:
@@ -151,7 +151,7 @@ services:
       - diun.enable=true
 
   prometheus_podman_exporter:
-    image: quay.io/navidys/prometheus-podman-exporter:v1.12.0
+    image: quay.io/navidys/prometheus-podman-exporter:v1.13.1
     container_name: grafana-prometheus-podman-exporter
     command: --collector.enhance-metrics
     environment:
@@ -184,7 +184,7 @@ services:
       - grafana
 
   grafana-nginx-prometheus-exporter-callisto:
-    image: docker.io/nginx/nginx-prometheus-exporter:1.1
+    image: docker.io/nginx/nginx-prometheus-exporter:1.3
     container_name: grafana-nginx-prometheus-exporter-callisto
     command: -nginx.scrape-uri=http://nginx:8080/stub_status -web.listen-address=:9114
     ports:
