@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.9.10
+    image: docker.io/jellyfin/jellyfin:10.9.11
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.52.5
+    image: docker.io/deluan/navidrome:0.53.2
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.9.1
+    image: docker.io/linuxserver/radarr:5.10.4
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -169,7 +169,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.4.3
+    image: docker.io/linuxserver/bazarr:1.4.4
     container_name: media-bazarr
     restart: unless-stopped
     environment:
