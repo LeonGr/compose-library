@@ -165,6 +165,8 @@ services:
     userns_mode: keep-id:uid=65534
     networks:
       - grafana
+    ports:
+      - 9882:9882
     labels:
       # watch all tags
       - diun.watch_repo=true
