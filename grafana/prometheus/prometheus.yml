@@ -90,3 +90,10 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ["loki:3100"]
+
+  - job_name: matrix-sliding-sync-proxy-exporter
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["matrix-sliding-sync-proxy-exporter.internal"]
