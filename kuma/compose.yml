@@ -9,6 +9,9 @@ services:
       - 3001:3001
     volumes:
       - ./data:/app/data
+      - ../nginx/self_signed/rootCA.crt:/ca.crt:ro
+    environment:
+      NODE_EXTRA_CA_CERTS: '/ca.crt' # make node.js accept cert
     labels:
       # watch all tags
       - diun.watch_repo=true
