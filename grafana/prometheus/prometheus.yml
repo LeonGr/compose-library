@@ -7,7 +7,7 @@ scrape_configs:
     static_configs:
     - targets: ["prometheus:9090"]
 
-  - job_name: "node"
+  - job_name: "node-exporter-callisto"
     static_configs:
     - targets: ["node-exporter:9100"]
 
