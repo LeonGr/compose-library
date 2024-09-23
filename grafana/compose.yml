@@ -86,6 +86,7 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/prometheus/prometheus.yml
       - prometheus_data:/prometheus
+      - ../nginx/self_signed/rootCA.crt:/ca.crt:ro
     networks:
       - grafana
     labels:

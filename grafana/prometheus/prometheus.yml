@@ -94,6 +94,6 @@ scrape_configs:
   - job_name: matrix-sliding-sync-proxy-exporter
     scheme: https
     tls_config:
-      insecure_skip_verify: true
+      ca_file: /ca.crt
     static_configs:
       - targets: ["matrix-sliding-sync-proxy-exporter.internal"]
