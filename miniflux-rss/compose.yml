@@ -16,6 +16,8 @@ services:
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - METRICS_COLLECTOR=1
+      - METRICS_ALLOWED_NETWORKS=192.168.3.0/24
     labels:
       # watch all tags
       - diun.watch_repo=true
