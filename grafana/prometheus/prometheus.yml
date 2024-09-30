@@ -97,3 +97,8 @@ scrape_configs:
       ca_file: /ca.crt
     static_configs:
       - targets: ["matrix-sliding-sync-proxy-exporter.internal"]
+
+  - job_name: "miniflux-metrics"
+    scheme: https
+    static_configs:
+      - targets: ["rss.lhax.xyz"]
