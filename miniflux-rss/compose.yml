@@ -18,6 +18,7 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - METRICS_COLLECTOR=1
       - METRICS_ALLOWED_NETWORKS=10.89.0.0/16
+      - BATCH_SIZE=20
     labels:
       # watch all tags
       - diun.watch_repo=true
