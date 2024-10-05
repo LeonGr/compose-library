@@ -34,3 +34,7 @@ fi
 for cn in "$@"; do
     generate_certificate $cn
 done
+
+echo "Done. Don't forget to set ownership"
+
+exit 0
