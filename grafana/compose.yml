@@ -229,6 +229,19 @@ services:
       # enable diun
       - diun.enable=true
 
+  influxdb:
+    image: docker.io/library/influxdb:2.7.10
+    container_name: grafana-influxdb
+    ports:
+      - '8086:8086'
+    volumes:
+      - './influxdb:/var/lib/influxdb2'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+
 networks:
   grafana:
     external: false
