@@ -51,7 +51,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:16.4
+    image: docker.io/library/postgres:17.0
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
