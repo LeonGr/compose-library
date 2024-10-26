@@ -102,6 +102,19 @@ services:
       # enable diun
       - diun.enable=true
 
+  collabora:
+    image: docker.io/collabora/code:24.04.9.1.1
+    container_name: nextcloud-collabora
+    ports:
+      - "9980:9980"
+    networks:
+      - nextcloud
+    environment:
+      - username=${COLLABORA_USERNAME}
+      - password=${COLLABORA_PASSWORD}
+      - 'extra_params=--o:ssl.enable=false'
+      - server_name=nextcloud-collabora-callisto
+
 volumes:
   nextcloud:
     external: true
