@@ -102,3 +102,10 @@ scrape_configs:
     scheme: https
     static_configs:
       - targets: ["rss.lhax.xyz"]
+
+  - job_name: tubearchivist-metrics
+    scheme: https
+    tls_config:
+      ca_file: /ca.crt
+    static_configs:
+      - targets: ["tubearchivist-metrics.internal"]
