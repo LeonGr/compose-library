@@ -112,8 +112,7 @@ services:
     environment:
       - username=${COLLABORA_USERNAME}
       - password=${COLLABORA_PASSWORD}
-      - 'extra_params=--o:ssl.enable=false'
-      - server_name=nextcloud-collabora-callisto
+      - server_name=collabora.internal
 
 volumes:
   nextcloud:
