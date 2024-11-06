@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.9.11
+    image: docker.io/jellyfin/jellyfin:10.10.1
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.13.1
+    image: docker.io/linuxserver/radarr:5.14.0
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.4.1-develop
+    image: docker.io/linuxserver/readarr:0.4.3-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
