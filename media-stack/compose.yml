@@ -390,3 +390,19 @@ services:
       # enable diun
       - diun.enable=true
 
+  ersatz-tv:
+    image: docker.io/jasongdove/ersatztv:v0.8.8-vaapi
+    container_name: media-ersatz-tv
+    ports:
+      - "8409:8409"
+    volumes:
+      - ./ersatz-tv:/root/.local/share/ersatztv
+      - ~/Media/media-stack:/media:ro
+    depends_on:
+      - jellyfin
+    environment:
+      TZ: 'Europe/Amsterdam'
+    devices:
+      # VAAPI Devices
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card1:/dev/dri/card0
