@@ -406,3 +406,14 @@ services:
       # VAAPI Devices
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card1:/dev/dri/card0
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^v\d+\.\d+\.\d+-vaapi$
+      # enable diun
+      - diun.enable=true
