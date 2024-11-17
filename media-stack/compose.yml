@@ -417,3 +417,48 @@ services:
       - diun.include_tags=^v\d+\.\d+\.\d+-vaapi$
       # enable diun
       - diun.enable=true
+
+  letterboxd-monitor:
+    image: docker.io/screeny05/letterboxd-list-radarr:1.1.6
+    container_name: media-letterboxd-monitor
+    ports:
+        - 5000:5000
+    environment:
+        - REDIS_URL=redis://redis:6379
+    depends_on:
+        - redis
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
+
+
+  redis:
+    image: docker.io/library/redis:7.4.0
+    container_name: media-redis
+    restart: unless-stopped
+    volumes:
+      - media_redis:/data
+    labels:
+      # watch all tags
+      - diun.watch_repo=true
+      # maximum number of tags to watch
+      - diun.max_tags=3
+      # sort by semantical versioning order
+      - diun.sort_tags=semver
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
+      # enable diun
+      - diun.enable=true
+
+volumes:
+  media_redis:
+    external: true
+    name: media_redis
