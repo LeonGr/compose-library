@@ -56,7 +56,7 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^\d+\.\d+\.\d+-.*$
+      - diun.include_tags=^\d+\.\d+\.\d+-v\d+-x86_64$
       # enable diun
       - diun.enable=true
 
