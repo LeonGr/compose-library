@@ -92,6 +92,7 @@ services:
 
   tubearchivist-metrics:
     image: docker.io/bbilly1/tubearchivist-metrics:v0.0.1
+    restart: unless-stopped
     container_name: tubearchivist-metrics
     environment:
       - "ES_PASSWORD=${ELASTIC_PASSWORD}"
