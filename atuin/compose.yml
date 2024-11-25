@@ -30,7 +30,7 @@ services:
 
   postgresql:
     container_name: atuin-postgres
-    image: docker.io/library/postgres:17.0
+    image: docker.io/library/postgres:17.2
     restart: unless-stopped
     volumes:
       - "./data:/var/lib/postgresql/data/"
