@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.10.1
+    image: docker.io/jellyfin/jellyfin:10.10.3
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.14.0
+    image: docker.io/linuxserver/radarr:5.15.1
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -224,7 +224,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.25.4
+    image: docker.io/linuxserver/prowlarr:1.26.1
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.4.3-develop
+    image: docker.io/linuxserver/readarr:0.4.4-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
@@ -275,7 +275,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.17.01
+    image: ghcr.io/haveagitgat/tdarr:2.27.02
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -341,7 +341,7 @@ services:
       - diun.enable=true
 
   jellystat-db:
-    image: docker.io/library/postgres:17.0
+    image: docker.io/library/postgres:17.2
     container_name: media-jellystat-postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -362,7 +362,7 @@ services:
       - diun.enable=true
 
   jellystat:
-    image: docker.io/cyfershepard/jellystat:1.1.0
+    image: docker.io/cyfershepard/jellystat:1.1.1
     container_name: media-jellystat
     restart: unless-stopped
     environment:
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:7.4.0
+    image: docker.io/library/redis:7.4.1
     container_name: media-redis
     restart: unless-stopped
     volumes:
