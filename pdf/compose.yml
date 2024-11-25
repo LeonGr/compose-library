@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   stirling-pdf:
-    image: docker.io/frooodle/s-pdf:0.30.1
+    image: docker.io/frooodle/s-pdf:0.33.1
     container_name: pdf-stirling
     ports:
       - '2939:8080'
