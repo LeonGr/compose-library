@@ -51,7 +51,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:17.0
+    image: docker.io/library/postgres:17.2
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
@@ -117,7 +117,7 @@ services:
       - diun.enable=true
 
   gotenberg:
-    image: docker.io/thecodingmachine/gotenberg:8.12.0
+    image: docker.io/thecodingmachine/gotenberg:8.14.1
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
@@ -137,7 +137,7 @@ services:
       - diun.enable=true
 
   tika:
-    image: docker.io/apache/tika:2.8.0.0-full
+    image: docker.io/apache/tika:3.0.0.0-full
     container_name: paperless-tika
     restart: unless-stopped
     networks:
