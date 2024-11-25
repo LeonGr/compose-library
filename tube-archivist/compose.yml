@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   tubearchivist:
-    image: docker.io/bbilly1/tubearchivist:v0.4.10
+    image: docker.io/bbilly1/tubearchivist:v0.4.11
     container_name: tubearchivist
     ports:
       - 8612:8000
@@ -40,7 +40,7 @@ services:
       - diun.enable=true
 
   tubearchivist-redis:
-    image: docker.io/redis/redis-stack-server:7.4.0-v1
+    image: docker.io/redis/redis-stack-server:7.4.0-v1-x86_64
     container_name: tubearchivist-redis
     expose:
       - "6379"
