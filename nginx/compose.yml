@@ -31,6 +31,7 @@ services:
         # enable diun
       - diun.enable=true
     networks:
+    # required to connect to grafana-nginx-prometheus-exporter
       - grafana
 
 networks:
