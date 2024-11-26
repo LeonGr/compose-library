@@ -13,10 +13,12 @@ services:
       - ./letsencrypt/:/etc/letsencrypt/:ro
       - ./self_signed/certificates/:/etc/certificates/:ro
       - ~/Services/up-status-badges/:/up-status-badges/:ro
+      - /var/www/letsencrypt_webroot/:/letsencrypt_webroot:ro
     ports:
       - "80:8080"
       - "443:4430"
       - "8448:8448"
+      - "8294:8294"
     labels:
       # watch all tags
       - diun.watch_repo=true
