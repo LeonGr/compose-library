@@ -33,6 +33,8 @@ services:
     networks:
     # required to connect to grafana-nginx-prometheus-exporter
       - grafana
+    # required since podman 5.0 to access services running on host
+    network_mode: pasta
 
 networks:
   grafana:
