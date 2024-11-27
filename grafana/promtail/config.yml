@@ -16,6 +16,7 @@ scrape_configs:
     labels:
       job: varlogs
       __path__: /var/log/**/*log
+      __path_exclude__: /var/log/suricata/stats.log
       hostname: callisto
 
 - job_name: journal
