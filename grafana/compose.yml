@@ -63,6 +63,10 @@ services:
     command: -config.file=/etc/promtail/config.yml
     networks:
       - grafana
+    group_add:
+      - 983 # systemd-journal group
+    x-podman.gidmaps:
+      - "+g983:@983" # map host systemd-journal group number to container
     labels:
       # watch all tags
       - diun.watch_repo=true
