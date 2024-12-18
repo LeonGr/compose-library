@@ -109,3 +109,17 @@ scrape_configs:
       ca_file: /ca.crt
     static_configs:
       - targets: ["tubearchivist-metrics.internal"]
+
+  - job_name: nginx-prometheus-exporter-harpalyke
+    scheme: https
+    tls_config:
+      ca_file: /ca.crt
+    static_configs:
+      - targets: ["nginx-prometheus-exporter-harpalyke.internal"]
+
+  - job_name: node-exporter-harpalyke
+    scheme: https
+    tls_config:
+      ca_file: /ca.crt
+    static_configs:
+      - targets: ["node-exporter-harpalyke.internal"]
