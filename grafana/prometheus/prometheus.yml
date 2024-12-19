@@ -123,3 +123,15 @@ scrape_configs:
       ca_file: /ca.crt
     static_configs:
       - targets: ["node-exporter-harpalyke.internal"]
+
+  - job_name: tailscale-client
+    static_configs:
+      - targets: [
+          "jupiter-ts:5252",
+          "callisto-ts:5252",
+          "harpalyke-ts:5252",
+          "lysithea-ts:5252",
+          "dia-ts:5252",
+          "ganymedes-ts:5252",
+          "pandia-ts:5252",
+        ]
