@@ -2,7 +2,7 @@ version: '3'
 
 services:
   bind:
-    image: docker.io/ubuntu/bind9:9.18-24.04_edge
+    image: docker.io/ubuntu/bind9:9.20-24.10_edge
     container_name: dns-bind
     restart: unless-stopped
     networks:
