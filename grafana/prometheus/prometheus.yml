@@ -75,8 +75,11 @@ scrape_configs:
       - targets: ["192.168.3.9:9617"]
 
   - job_name: "bind-exporter"
+    scheme: https
+    tls_config:
+      ca_file: /ca.crt
     static_configs:
-      - targets: ["grafana-bind-exporter:9119"]
+      - targets: ["bind-exporter.internal"]
 
   - job_name: OpenWrt
     static_configs:
