@@ -38,6 +38,9 @@ services:
       BROWSER_WEB_URL: http://hoarder-chrome:9222
       # OPENAI_API_KEY: ...
       DATA_DIR: /data
+    labels:
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
 
   hoarder-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
@@ -50,6 +53,9 @@ services:
       - --remote-debugging-address=0.0.0.0
       - --remote-debugging-port=9222
       - --hide-scrollbars
+    labels:
+      # regular expression to filter tags
+      - diun.include_tags=^\d+$
 
   hoarder-meilisearch:
     image: docker.io/getmeili/meilisearch:v1.11.1
@@ -61,3 +67,6 @@ services:
       MEILI_NO_ANALYTICS: "true"
     volumes:
       - ./hoarder-meilisearch-data:/meili_data
+    labels:
+      # regular expression to filter tags
+      - diun.include_tags=^v\d+\.\d+\.\d+$
