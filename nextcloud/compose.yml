@@ -58,6 +58,7 @@ services:
       - POSTGRES_USER=nextcloud
       - POSTGRES_PASSWORD=${DB_ROOT_PASSWD}
       - REDIS_HOST=redis
+      - PHP_UPLOAD_LIMIT=${PHP_UPLOAD_LIMIT}
     depends_on:
       - db
       - redis
