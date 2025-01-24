@@ -43,7 +43,7 @@ services:
       - diun.include_tags=^\d+\.\d+\.\d+$
 
   hoarder-chrome:
-    image: docker.io/zenika/alpine-chrome:123
+    image: docker.io/zenika/alpine-chrome:124
     container_name: bookmarks-hoarder-chrome
     restart: unless-stopped
     command:
@@ -58,7 +58,7 @@ services:
       - diun.include_tags=^\d+$
 
   hoarder-meilisearch:
-    image: docker.io/getmeili/meilisearch:v1.11.1
+    image: docker.io/getmeili/meilisearch:v1.12.7
     container_name: bookmarks-hoarder-meilisearch
     restart: unless-stopped
     env_file:
