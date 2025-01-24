@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.10.3
+    image: docker.io/jellyfin/jellyfin:10.10.4
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.54.2
+    image: docker.io/deluan/navidrome:0.54.4
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.16.3
+    image: docker.io/linuxserver/radarr:5.17.2
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -141,7 +141,7 @@ services:
       - diun.enable=true
 
   sonarr:
-    image: docker.io/linuxserver/sonarr:4.0.11
+    image: docker.io/linuxserver/sonarr:4.0.12
     container_name: media-sonarr
     restart: unless-stopped
     environment:
@@ -169,7 +169,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.5.0
+    image: docker.io/linuxserver/bazarr:1.5.1
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -224,7 +224,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.28.2
+    image: docker.io/linuxserver/prowlarr:1.29.2
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.4.6-develop
+    image: docker.io/linuxserver/readarr:0.4.9-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
@@ -275,7 +275,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.27.02
+    image: ghcr.io/haveagitgat/tdarr:2.28.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -317,7 +317,7 @@ services:
       - diun.enable=true
 
   ombi:
-    image: ghcr.io/linuxserver/ombi:4.44.1
+    image: ghcr.io/linuxserver/ombi:4.47.1
     container_name: media-ombi
     restart: unless-stopped
     environment:
@@ -391,7 +391,7 @@ services:
       - diun.enable=true
 
   ersatz-tv:
-    image: docker.io/jasongdove/ersatztv:v0.8.8-vaapi
+    image: docker.io/jasongdove/ersatztv:v25.1.0-vaapi
     container_name: media-ersatz-tv
     ports:
       - "8409:8409"
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:7.4.1
+    image: docker.io/library/redis:7.4.2
     container_name: media-redis
     restart: unless-stopped
     volumes:
