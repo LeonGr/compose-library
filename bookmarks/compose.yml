@@ -43,7 +43,7 @@ services:
       - diun.include_tags=^\d+\.\d+\.\d+$
 
   hoarder-chrome:
-    image: gcr.io/zenika-hub/alpine-chrome:123
+    image: docker.io/zenika/alpine-chrome:123
     container_name: bookmarks-hoarder-chrome
     restart: unless-stopped
     command:
