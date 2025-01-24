@@ -27,7 +27,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:7.4.1
+    image: docker.io/library/redis:7.4.2
     container_name: nextcloud-redis
     restart: unless-stopped
     volumes:
@@ -47,7 +47,7 @@ services:
       - diun.enable=true
 
   nextcloud:
-    image: docker.io/library/nextcloud:30.0.4-apache
+    image: docker.io/library/nextcloud:30.0.5-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
@@ -81,7 +81,7 @@ services:
 
   # Speed up preview generation (based on https://github.com/h2non/imaginary)
   imaginary:
-    image: docker.io/nextcloud/aio-imaginary:20241216_102930
+    image: docker.io/nextcloud/aio-imaginary:20250122_091948
     container_name: nextcloud-imaginary
     volumes:
       - nextcloud:/mnt/data:ro
