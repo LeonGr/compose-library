@@ -87,6 +87,7 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
+      - ./textfile_collector/prom/:/textfile_collector_files/
     ports:
       - "9100:9100"
     command:
@@ -94,6 +95,7 @@ services:
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--collector.textfile.directory=/textfile_collector_files/'
     networks:
       - grafana
     labels:
