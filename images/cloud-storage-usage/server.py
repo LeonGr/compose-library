@@ -16,6 +16,14 @@ class UsageRecord:
     total_bytes: int
     used_bytes: int
 
+class StorageUsageRequest:
+    def __init__(self, name, url, username, password, send_request_function):
+        self.name = name
+        def execute():
+            return send_request_function(url, username, password)
+
+        self.execute = execute
+
 def get_env(name):
     load_dotenv()
 
@@ -23,22 +31,13 @@ def get_env(name):
 
 
 def get_webdav_usage_info(webdav_url, username, password) -> UsageRecord:
-    xml_data = """
-<?xml version="1.0" encoding="UTF-8" ?>
-<D:propfind xmlns:D="DAV:">
-<D:prop>
-    <D:quota-available-bytes/>
-    <D:quota-used-bytes/>
-</D:prop>
-</D:propfind>
-    """
+    xml_data = """<?xml version="1.0" encoding="UTF-8" ?><D:propfind xmlns:D="DAV:"><D:prop><D:quota-available-bytes/><D:quota-used-bytes/></D:prop></D:propfind>"""
 
     headers = {
         'Depth': '0',
-        'Content-Type': 'application/x-www-form-urlencoded',
     }
 
-    response = requests.request('PROPFIND', f'{webdav_url}', headers=headers, data=xml_data, auth=(f'{username}', f'{password}'), timeout=10)
+    response = requests.request('PROPFIND', webdav_url, headers=headers, data=xml_data, auth=(username, password), timeout=10)
 
     root = ET.fromstring(response.text)
     namespaces = {'d': 'DAV:'}
@@ -74,43 +73,26 @@ def get_metrics_message() -> str:
     ok_usage_messages = []
     ok_free_messages = []
 
-    try:
-        webdav_username = get_env("WEBDAV_USERNAME")
-        webdav_password = get_env("WEBDAV_PASSWORD")
-        webdav_url = get_env("WEBDAV_URL")
+    requests = [
+        StorageUsageRequest("TransIP Stack", get_env("STACK_URL"), get_env("STACK_USERNAME"), get_env("STACK_PASSWORD"), get_webdav_usage_info),
+        StorageUsageRequest("Hetzner Storagebox", get_env("STORAGEBOX_URL"), get_env("STORAGEBOX_USERNAME"), get_env("STORAGEBOX_PASSWORD"), get_storagebox_usage_info),
+    ]
 
-        webdav_usage_info = get_webdav_usage_info(webdav_url, webdav_username, webdav_password)
+    for request in requests:
+        try:
+            usage_info = request.execute()
 
-        webdav_usage = webdav_usage_info.used_bytes
-        webdav_total = webdav_usage_info.total_bytes
+            used_bytes = usage_info.used_bytes
+            total_bytes = usage_info.total_bytes
 
-        webdav_usage_message = get_storage_total_used_metric("webdav", webdav_usage)
-        webdav_free_message = get_storage_total_free_metric("webdav", webdav_total - webdav_usage)
+            usage_message = get_storage_total_used_metric(request.name, used_bytes)
+            free_message = get_storage_total_free_metric(request.name, total_bytes - used_bytes)
 
-        ok_usage_messages.append(webdav_usage_message)
-        ok_free_messages.append(webdav_free_message)
-    except Exception as e:
-        logging.error("Could not get webdav_usage_info", exc_info=e)
+            ok_usage_messages.append(usage_message)
+            ok_free_messages.append(free_message)
+        except Exception as e:
+            logging.error("Could not get " + request.name, exc_info=e)
 
-    try:
-        storagebox_username = get_env("STORAGEBOX_USERNAME")
-        storagebox_password = get_env("STORAGEBOX_PASSWORD")
-        storagebox_url = get_env("STORAGEBOX_URL")
-
-        storagebox_usage_info = get_storagebox_usage_info(
-            storagebox_url, storagebox_username, storagebox_password)
-
-        storagebox_usage = storagebox_usage_info.used_bytes
-        storagebox_total = storagebox_usage_info.total_bytes
-
-        storagebox_usage_message = get_storage_total_used_metric("storagebox", storagebox_usage)
-        storagebox_free_message = get_storage_total_free_metric(
-            "storagebox", storagebox_total - storagebox_usage)
-
-        ok_usage_messages.append(storagebox_usage_message)
-        ok_free_messages.append(storagebox_free_message)
-    except Exception as e:
-        logging.error("Could not get storagebox_usage_info", exc_info=e)
 
     output_message = ""
 
