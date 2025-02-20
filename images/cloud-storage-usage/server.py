@@ -76,6 +76,7 @@ def get_metrics_message() -> str:
     requests = [
         StorageUsageRequest("TransIP Stack", get_env("STACK_URL"), get_env("STACK_USERNAME"), get_env("STACK_PASSWORD"), get_webdav_usage_info),
         StorageUsageRequest("Hetzner Storagebox", get_env("STORAGEBOX_URL"), get_env("STORAGEBOX_USERNAME"), get_env("STORAGEBOX_PASSWORD"), get_storagebox_usage_info),
+        StorageUsageRequest("Infomaniak kDrive", get_env("KDRIVE_URL"), get_env("KDRIVE_USERNAME"), get_env("KDRIVE_PASSWORD"), get_webdav_usage_info),
     ]
 
     for request in requests:
