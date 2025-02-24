@@ -2,7 +2,7 @@ version: "3"
 
 services:
   photoprism:
-    image: docker.io/photoprism/photoprism:240915-ce
+    image: docker.io/photoprism/photoprism:250223-legacy
     container_name: photos-photoprism
     depends_on:
       - mariadb
@@ -64,7 +64,7 @@ services:
       - diun.enable=true
 
   mariadb:
-    image: docker.io/library/mariadb:11.6.2
+    image: docker.io/library/mariadb:11.7.2
     container_name: photos-photoprism-mariadb
     restart: unless-stopped
     security_opt:
