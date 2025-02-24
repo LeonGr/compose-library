@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: docker.io/library/postgres:17.2
+    image: docker.io/library/postgres:17.4
     container_name: nextcloud-postgres
     restart: unless-stopped
     environment:
@@ -47,7 +47,7 @@ services:
       - diun.enable=true
 
   nextcloud:
-    image: docker.io/library/nextcloud:30.0.5-apache
+    image: docker.io/library/nextcloud:30.0.6-apache
     container_name: nextcloud
     restart: unless-stopped
     volumes:
@@ -81,7 +81,7 @@ services:
 
   # Speed up preview generation (based on https://github.com/h2non/imaginary)
   imaginary:
-    image: docker.io/nextcloud/aio-imaginary:20250122_091948
+    image: docker.io/nextcloud/aio-imaginary:20250204_102259
     container_name: nextcloud-imaginary
     volumes:
       - nextcloud:/mnt/data:ro
@@ -105,7 +105,7 @@ services:
       - diun.enable=true
 
   collabora:
-    image: docker.io/collabora/code:24.04.9.1.1
+    image: docker.io/collabora/code:24.04.12.4.1
     container_name: nextcloud-collabora
     ports:
       - "9980:9980"
