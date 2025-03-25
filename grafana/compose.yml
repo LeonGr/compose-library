@@ -111,7 +111,7 @@ services:
       - diun.enable=true
 
   blackbox-exporter:
-    image: docker.io/prom/blackbox-exporter:v0.25.0
+    image: docker.io/prom/blackbox-exporter:v0.26.0
     container_name: grafana-blackbox-exporter
     ports:
       - "9115:9115"
@@ -134,7 +134,7 @@ services:
       - diun.enable=true
 
   prometheus_podman_exporter:
-    image: quay.io/navidys/prometheus-podman-exporter:v1.14.1
+    image: quay.io/navidys/prometheus-podman-exporter:v1.15.0
     container_name: grafana-prometheus-podman-exporter
     command: --collector.enhance-metrics
     environment:
