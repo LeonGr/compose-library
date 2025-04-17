@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   tubearchivist:
-    image: docker.io/bbilly1/tubearchivist:v0.5.0
+    image: docker.io/bbilly1/tubearchivist:v0.5.1
     container_name: tubearchivist
     ports:
       - 8612:8000
