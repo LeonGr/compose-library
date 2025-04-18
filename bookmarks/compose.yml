@@ -23,28 +23,28 @@ services:
     # depends_on:
       # - postgres
 
-  hoarder-web:
-    image: ghcr.io/hoarder-app/hoarder:0.23.0
-    container_name: bookmarks-hoarder-web
+  karakeep-web:
+    image: ghcr.io/karakeep-app/karakeep:0.23.2
+    container_name: bookmarks-karakeep-web
     restart: unless-stopped
     volumes:
-      - ./hoarder-data:/data
+      - ./karakeep-data:/data
     ports:
       - 3002:3000
     env_file:
       - .env
     environment:
-      MEILI_ADDR: http://hoarder-meilisearch:7700
-      BROWSER_WEB_URL: http://hoarder-chrome:9222
+      MEILI_ADDR: http://karakeep-meilisearch:7700
+      BROWSER_WEB_URL: http://karakeep-chrome:9222
       # OPENAI_API_KEY: ...
       DATA_DIR: /data
     labels:
       # regular expression to filter tags
       - diun.include_tags=^\d+\.\d+\.\d+$
 
-  hoarder-chrome:
+  karakeep-chrome:
     image: docker.io/zenika/alpine-chrome:124
-    container_name: bookmarks-hoarder-chrome
+    container_name: bookmarks-karakeep-chrome
     restart: unless-stopped
     command:
       - --no-sandbox
@@ -57,16 +57,16 @@ services:
       # regular expression to filter tags
       - diun.include_tags=^\d+$
 
-  hoarder-meilisearch:
+  karakeep-meilisearch:
     image: docker.io/getmeili/meilisearch:v1.11.1
-    container_name: bookmarks-hoarder-meilisearch
+    container_name: bookmarks-karakeep-meilisearch
     restart: unless-stopped
     env_file:
       - .env
     environment:
       MEILI_NO_ANALYTICS: "true"
     volumes:
-      - ./hoarder-meilisearch-data:/meili_data
+      - ./karakeep-meilisearch-data:/meili_data
     labels:
       # regular expression to filter tags
       - diun.include_tags=^v\d+\.\d+\.\d+$
