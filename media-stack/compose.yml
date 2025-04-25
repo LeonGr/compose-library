@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.10.6
+    image: docker.io/jellyfin/jellyfin:10.10.7
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.55.1
+    image: docker.io/deluan/navidrome:0.55.2
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.21.1
+    image: docker.io/linuxserver/radarr:5.22.4
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -224,7 +224,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.32.2
+    image: docker.io/linuxserver/prowlarr:1.34.1
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.4.12-develop
+    image: docker.io/linuxserver/readarr:0.4.15-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
@@ -275,7 +275,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.35.02
+    image: ghcr.io/haveagitgat/tdarr:2.40.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -362,7 +362,7 @@ services:
       - diun.enable=true
 
   jellystat:
-    image: docker.io/cyfershepard/jellystat:1.1.3
+    image: docker.io/cyfershepard/jellystat:1.1.5
     container_name: media-jellystat
     restart: unless-stopped
     environment:
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:7.4.2
+    image: docker.io/library/redis:7.4.3
     container_name: media-redis
     restart: unless-stopped
     volumes:
