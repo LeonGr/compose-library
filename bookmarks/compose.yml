@@ -58,7 +58,7 @@ services:
       - diun.include_tags=^\d+$
 
   karakeep-meilisearch:
-    image: docker.io/getmeili/meilisearch:v1.11.1
+    image: docker.io/getmeili/meilisearch:v1.13.3
     container_name: bookmarks-karakeep-meilisearch
     restart: unless-stopped
     env_file:
