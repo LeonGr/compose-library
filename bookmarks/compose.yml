@@ -38,6 +38,7 @@ services:
       BROWSER_WEB_URL: http://karakeep-chrome:9222
       # OPENAI_API_KEY: ...
       DATA_DIR: /data
+      DISABLE_SIGNUPS: "true"
     labels:
       # regular expression to filter tags
       - diun.include_tags=^\d+\.\d+\.\d+$
