@@ -19,6 +19,7 @@ services:
       - METRICS_COLLECTOR=1
       - METRICS_ALLOWED_NETWORKS=10.89.0.0/16,100.64.0.0/10,192.168.3.0/24
       - BATCH_SIZE=20
+      - BASE_URL=${BASE_URL}
     labels:
       # watch all tags
       - diun.watch_repo=true
