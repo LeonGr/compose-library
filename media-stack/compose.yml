@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.22.4
+    image: docker.io/linuxserver/radarr:5.24.1
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -169,7 +169,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.5.1
+    image: docker.io/linuxserver/bazarr:1.5.2
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -197,7 +197,7 @@ services:
       - diun.enable=true
 
   lidarr:
-    image: docker.io/linuxserver/lidarr:2.10.3
+    image: docker.io/linuxserver/lidarr:2.11.2
     container_name: media-lidarr
     restart: unless-stopped
     environment:
@@ -224,7 +224,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.34.1
+    image: docker.io/linuxserver/prowlarr:1.36.3
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.4.15-develop
+    image: docker.io/linuxserver/readarr:0.4.16-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
@@ -341,7 +341,7 @@ services:
       - diun.enable=true
 
   jellystat-db:
-    image: docker.io/library/postgres:17.4
+    image: docker.io/library/postgres:17.5
     container_name: media-jellystat-postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:7.4.3
+    image: docker.io/library/redis:8.0.1
     container_name: media-redis
     restart: unless-stopped
     volumes:
@@ -459,7 +459,7 @@ services:
       - diun.enable=true
 
   scraparr:
-    image: ghcr.io/thecfu/scraparr:2.1.2
+    image: ghcr.io/thecfu/scraparr:2.2.1
     container_name: media-scraparr
     ports:
       - "7100:7100"
