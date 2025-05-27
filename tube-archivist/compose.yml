@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   tubearchivist:
-    image: docker.io/bbilly1/tubearchivist:v0.5.1
+    image: docker.io/bbilly1/tubearchivist:v0.5.2
     container_name: tubearchivist
     ports:
       - 8612:8000
@@ -40,7 +40,7 @@ services:
       - diun.enable=true
 
   tubearchivist-redis:
-    image: docker.io/library/redis:7.4.3
+    image: docker.io/library/redis:8.0.1
     container_name: tubearchivist-redis
     expose:
       - "6379"
@@ -61,7 +61,7 @@ services:
       - diun.enable=true
 
   tubearchivist-elasticsearch:
-    image: docker.io/bbilly1/tubearchivist-es:8.17.2
+    image: docker.io/bbilly1/tubearchivist-es:8.18.0
     container_name: tubearchivist-elasticsearch
     environment:
       - "ELASTIC_PASSWORD=${ELASTIC_PASSWORD}"       # matching Elasticsearch password
