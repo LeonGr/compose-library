@@ -57,3 +57,6 @@ services:
       # enable diun
       - diun.enable=true
 
+networks:
+  miniflux:
+    enable_ipv6: true
