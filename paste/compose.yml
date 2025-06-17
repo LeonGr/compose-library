@@ -1,17 +1,16 @@
 version: '3'
 
 services:
-  paste:
-    image: localhost/shortpaste
-    container_name: shortpaste
+  rustypaste:
+    image: ghcr.io/orhun/rustypaste/rustypaste:0.16.1
+    container_name: rustypaste
     restart: unless-stopped
-    volumes:
-      - ./pastes/shortpaste:/root/.shortpaste
-      - ./favicon.ico:/usr/local/bin/shortpaste/static/favicon.ico
-    environment:
-      - SP_USERNAME=${USERNAME}
-      - SP_PASSWORD=${PASSWORD}
-      - SP_307_REDIRECT=1 # redirect directly instead of showing delay page
+    # environment:
+      # - RUST_LOG=debug
+    env_file:
+      - ./.env
     ports:
-      - 7452:8080
-
+      - "7452:8000"
+    volumes:
+      - ./rustypaste_upload/:/app/upload
+      - ./config.toml:/app/config.toml
