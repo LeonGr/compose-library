@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.55.2
+    image: docker.io/deluan/navidrome:0.56.1
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -59,7 +59,7 @@ services:
       - diun.enable=true
 
   transmission-openvpn:
-    image: docker.io/haugene/transmission-openvpn:5.3.1
+    image: docker.io/haugene/transmission-openvpn:5.3.2
     container_name: media-transmission-openvpn
     mem_limit: 2g
     memswap_limit: 4g
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.24.1
+    image: docker.io/linuxserver/radarr:5.26.2
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -141,7 +141,7 @@ services:
       - diun.enable=true
 
   sonarr:
-    image: docker.io/linuxserver/sonarr:4.0.14
+    image: docker.io/linuxserver/sonarr:4.0.15
     container_name: media-sonarr
     restart: unless-stopped
     environment:
@@ -197,7 +197,7 @@ services:
       - diun.enable=true
 
   lidarr:
-    image: docker.io/linuxserver/lidarr:2.11.2
+    image: docker.io/linuxserver/lidarr:2.12.4
     container_name: media-lidarr
     restart: unless-stopped
     environment:
@@ -224,7 +224,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:1.36.3
+    image: docker.io/linuxserver/prowlarr:1.37.0
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -248,7 +248,7 @@ services:
       - diun.enable=true
 
   readarr:
-    image: docker.io/linuxserver/readarr:0.4.16-develop
+    image: docker.io/linuxserver/readarr:0.4.18-develop
     container_name: media-readarr
     restart: unless-stopped
     environment:
@@ -275,7 +275,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.40.01
+    image: ghcr.io/haveagitgat/tdarr:2.45.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:8.0.1
+    image: docker.io/library/redis:8.0.2
     container_name: media-redis
     restart: unless-stopped
     volumes:
@@ -459,7 +459,7 @@ services:
       - diun.enable=true
 
   scraparr:
-    image: ghcr.io/thecfu/scraparr:2.2.1
+    image: ghcr.io/thecfu/scraparr:2.2.2
     container_name: media-scraparr
     ports:
       - "7100:7100"
