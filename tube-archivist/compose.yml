@@ -40,7 +40,7 @@ services:
       - diun.enable=true
 
   tubearchivist-redis:
-    image: docker.io/library/redis:8.0.1
+    image: docker.io/library/redis:8.0.2
     container_name: tubearchivist-redis
     expose:
       - "6379"
