@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 import requests
 
 PORT = 9393
+#  PORT = 9394
 
 @dataclass
 class UsageRecord:
@@ -17,10 +18,10 @@ class UsageRecord:
     used_bytes: int
 
 class StorageUsageRequest:
-    def __init__(self, name, url, username, password, send_request_function):
+    def __init__(self, name, url, credentials, send_request_function):
         self.name = name
         def execute():
-            return send_request_function(url, username, password)
+            return send_request_function(url, credentials)
 
         self.execute = execute
 
@@ -30,14 +31,14 @@ def get_env(name):
     return os.getenv(name)
 
 
-def get_webdav_usage_info(webdav_url, username, password) -> UsageRecord:
+def get_webdav_usage_info(webdav_url, credentials) -> UsageRecord:
     xml_data = """<?xml version="1.0" encoding="UTF-8" ?><D:propfind xmlns:D="DAV:"><D:prop><D:quota-available-bytes/><D:quota-used-bytes/></D:prop></D:propfind>"""
 
     headers = {
         'Depth': '0',
     }
 
-    response = requests.request('PROPFIND', webdav_url, headers=headers, data=xml_data, auth=(username, password), timeout=10)
+    response = requests.request('PROPFIND', webdav_url, headers=headers, data=xml_data, auth=credentials, timeout=10)
 
     root = ET.fromstring(response.text)
     namespaces = {'d': 'DAV:'}
@@ -47,7 +48,8 @@ def get_webdav_usage_info(webdav_url, username, password) -> UsageRecord:
     return UsageRecord(total_bytes=available_bytes + used_bytes, used_bytes=used_bytes)
 
 
-def get_storagebox_usage_info(storagebox_url, username, password) -> UsageRecord:
+def get_storagebox_usage_info(storagebox_url, credentials) -> UsageRecord:
+    (username, password) = credentials
     response = requests.get(f'{storagebox_url}', auth=(f'{username}', f'{password}'), timeout=10)
 
     parsed = response.json()
@@ -74,9 +76,9 @@ def get_metrics_message() -> str:
     ok_free_messages = []
 
     requests = [
-        StorageUsageRequest("TransIP Stack", get_env("STACK_URL"), get_env("STACK_USERNAME"), get_env("STACK_PASSWORD"), get_webdav_usage_info),
-        StorageUsageRequest("Hetzner Storagebox", get_env("STORAGEBOX_URL"), get_env("STORAGEBOX_USERNAME"), get_env("STORAGEBOX_PASSWORD"), get_storagebox_usage_info),
-        StorageUsageRequest("Infomaniak kDrive", get_env("KDRIVE_URL"), get_env("KDRIVE_USERNAME"), get_env("KDRIVE_PASSWORD"), get_webdav_usage_info),
+        #  StorageUsageRequest("TransIP Stack", get_env("STACK_URL"), get_env("STACK_USERNAME"), get_env("STACK_PASSWORD"), get_webdav_usage_info),
+        StorageUsageRequest("Hetzner Storagebox", get_env("STORAGEBOX_URL"), (get_env("STORAGEBOX_USERNAME"), get_env("STORAGEBOX_PASSWORD")), get_storagebox_usage_info),
+        StorageUsageRequest("Infomaniak kDrive", get_env("KDRIVE_URL"), (get_env("KDRIVE_USERNAME"), get_env("KDRIVE_PASSWORD")), get_webdav_usage_info),
     ]
 
     for request in requests:
