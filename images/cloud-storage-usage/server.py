@@ -1,16 +1,13 @@
 import http.server
 import socketserver
-import subprocess
 from dotenv import load_dotenv
 import os
-import json
 import logging
 from dataclasses import dataclass
 import xml.etree.ElementTree as ET
 import requests
 
 PORT = 9393
-#  PORT = 9394
 
 @dataclass
 class UsageRecord:
@@ -20,10 +17,19 @@ class UsageRecord:
 class StorageUsageRequest:
     def __init__(self, name, url, credentials, send_request_function):
         self.name = name
+
         def execute():
             return send_request_function(url, credentials)
 
         self.execute = execute
+
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+
+    def __call__(self, r):
+        r.headers["authorization"] = "Bearer " + self.token
+        return r
 
 def get_env(name):
     load_dotenv()
@@ -38,7 +44,14 @@ def get_webdav_usage_info(webdav_url, credentials) -> UsageRecord:
         'Depth': '0',
     }
 
-    response = requests.request('PROPFIND', webdav_url, headers=headers, data=xml_data, auth=credentials, timeout=10)
+    response = requests.request(
+        'PROPFIND',
+        webdav_url,
+        headers=headers,
+        data=xml_data,
+        auth=credentials,
+        timeout=10
+    )
 
     root = ET.fromstring(response.text)
     namespaces = {'d': 'DAV:'}
@@ -48,18 +61,23 @@ def get_webdav_usage_info(webdav_url, credentials) -> UsageRecord:
     return UsageRecord(total_bytes=available_bytes + used_bytes, used_bytes=used_bytes)
 
 
-def get_storagebox_usage_info(storagebox_url, credentials) -> UsageRecord:
-    (username, password) = credentials
-    response = requests.get(f'{storagebox_url}', auth=(f'{username}', f'{password}'), timeout=10)
+def get_storagebox_usage_info(storagebox_url, token) -> UsageRecord:
+    print("url:", storagebox_url)
+    print("token:", token)
+    response = requests.get(f'{storagebox_url}', auth=BearerAuth(token), timeout=10)
 
     parsed = response.json()
 
-    storagebox = parsed["storagebox"]
-    usage_megabytes = storagebox["disk_usage"]
-    total_megabytes = storagebox["disk_quota"]
+    print(parsed)
 
-    total_bytes = total_megabytes * 1000**2
-    usage_bytes = usage_megabytes * 1000**2
+    storagebox = parsed["storage_box"]
+    total_bytes = storagebox["storage_box_type"]["size"]
+    usage_bytes = storagebox["stats"]["size"]
+    #  usage_megabytes = storagebox["disk_usage"]
+    #  total_megabytes = storagebox["disk_quota"]
+
+    #  total_bytes = total_megabytes * 1000**2
+    #  usage_bytes = usage_megabytes * 1000**2
 
     return UsageRecord(total_bytes=total_bytes, used_bytes=usage_bytes)
 
@@ -76,9 +94,18 @@ def get_metrics_message() -> str:
     ok_free_messages = []
 
     requests = [
-        #  StorageUsageRequest("TransIP Stack", get_env("STACK_URL"), get_env("STACK_USERNAME"), get_env("STACK_PASSWORD"), get_webdav_usage_info),
-        StorageUsageRequest("Hetzner Storagebox", get_env("STORAGEBOX_URL"), (get_env("STORAGEBOX_USERNAME"), get_env("STORAGEBOX_PASSWORD")), get_storagebox_usage_info),
-        StorageUsageRequest("Infomaniak kDrive", get_env("KDRIVE_URL"), (get_env("KDRIVE_USERNAME"), get_env("KDRIVE_PASSWORD")), get_webdav_usage_info),
+        StorageUsageRequest(
+            "Hetzner Storagebox",
+            get_env("STORAGEBOX_URL"),
+            get_env("STORAGEBOX_TOKEN"),
+            get_storagebox_usage_info
+        ),
+        StorageUsageRequest(
+            "Infomaniak kDrive",
+            get_env("KDRIVE_URL"),
+            (get_env("KDRIVE_USERNAME"), get_env("KDRIVE_PASSWORD")),
+            get_webdav_usage_info
+        ),
     ]
 
     for request in requests:
@@ -95,7 +122,6 @@ def get_metrics_message() -> str:
             ok_free_messages.append(free_message)
         except Exception as e:
             logging.error("Could not get " + request.name, exc_info=e)
-
 
     output_message = ""
 
