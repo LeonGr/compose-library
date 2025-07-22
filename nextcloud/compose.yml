@@ -59,6 +59,7 @@ services:
       - POSTGRES_PASSWORD=${DB_ROOT_PASSWD}
       - REDIS_HOST=redis
       - PHP_UPLOAD_LIMIT=${PHP_UPLOAD_LIMIT}
+      - APACHE_BODY_LIMIT=${APACHE_BODY_LIMIT}
       - PHP_MEMORY_LIMIT=4G
     depends_on:
       - db
