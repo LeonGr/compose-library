@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.56.1
+    image: docker.io/deluan/navidrome:0.57.0
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -391,7 +391,7 @@ services:
       - diun.enable=true
 
   ersatz-tv:
-    image: docker.io/jasongdove/ersatztv:v25.1.0-vaapi
+    image: docker.io/jasongdove/ersatztv:v25.2.0-vaapi
     container_name: media-ersatz-tv
     ports:
       - "8409:8409"
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:8.0.2
+    image: docker.io/library/redis:8.0.3
     container_name: media-redis
     restart: unless-stopped
     volumes:
