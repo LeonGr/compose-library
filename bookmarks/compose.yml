@@ -24,7 +24,7 @@ services:
       # - postgres
 
   karakeep-web:
-    image: ghcr.io/karakeep-app/karakeep:0.25.0
+    image: ghcr.io/karakeep-app/karakeep:0.26.0
     container_name: bookmarks-karakeep-web
     restart: unless-stopped
     volumes:
