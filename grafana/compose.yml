@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:12.0.2-security-01
+    image: docker.io/grafana/grafana-oss:12.1.0
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -25,7 +25,7 @@ services:
       - diun.enable=true
 
   loki:
-    image: docker.io/grafana/loki:3.5.1
+    image: docker.io/grafana/loki:3.5.3
     container_name: grafana-loki
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
@@ -53,7 +53,7 @@ services:
     # https://grafana.com/docs/loki/latest/clients/docker-driver/configuration/#change-the-default-logging-driver
 
   promtail:
-    image: docker.io/grafana/promtail:3.5.1
+    image: docker.io/grafana/promtail:3.5.3
     container_name: grafana-promtail
     volumes:
       - /var/log:/var/log
@@ -112,7 +112,7 @@ services:
       - diun.enable=true
 
   blackbox-exporter:
-    image: docker.io/prom/blackbox-exporter:v0.26.0
+    image: docker.io/prom/blackbox-exporter:v0.27.0
     container_name: grafana-blackbox-exporter
     ports:
       - "9115:9115"
@@ -135,7 +135,7 @@ services:
       - diun.enable=true
 
   prometheus_podman_exporter:
-    image: quay.io/navidys/prometheus-podman-exporter:v1.17.1
+    image: quay.io/navidys/prometheus-podman-exporter:v1.17.2
     container_name: grafana-prometheus-podman-exporter
     command: --collector.enhance-metrics
     environment:
