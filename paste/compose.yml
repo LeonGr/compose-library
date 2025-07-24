@@ -14,3 +14,6 @@ services:
     volumes:
       - ./rustypaste_upload/:/app/upload
       - ./config.toml:/app/config.toml
+    labels:
+      # regular expression to filter tags
+      - diun.include_tags=^\d+\.\d+\.\d+$
