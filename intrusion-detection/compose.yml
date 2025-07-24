@@ -2,7 +2,7 @@ version: '3'
 
 services:
   elasticsearch:
-    image: docker.io/library/elasticsearch:9.0.2
+    image: docker.io/library/elasticsearch:9.0.4
     container_name: ids-elasticsearch
     restart: never
     # "If --memory-swap is set to the same value as --memory, and --memory is set to a positive integer, the container doesn't have access to swap"
@@ -32,7 +32,7 @@ services:
       - diun.enable=true
 
   kibana:
-    image: docker.io/library/kibana:9.0.2
+    image: docker.io/library/kibana:9.0.4
     container_name: ids-kibana
     restart: unless-stopped
     environment:
@@ -60,7 +60,7 @@ services:
       - elasticsearch
 
   filebeat:
-    image: docker.io/elastic/filebeat:9.0.2
+    image: docker.io/elastic/filebeat:9.0.4
     container_name: ids-filebeat
     hostname: filebeat-callisto
     restart: unless-stopped
