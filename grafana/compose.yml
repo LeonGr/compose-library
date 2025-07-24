@@ -85,20 +85,14 @@ services:
     container_name: grafana-node-exporter
     restart: unless-stopped
     volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
+      - '/:/host:ro,rslave'
       - ./textfile_collector/prom/:/textfile_collector_files/
-    ports:
-      - "9100:9100"
     command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
+      - '--path.rootfs=/host'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
       - '--collector.textfile.directory=/textfile_collector_files/'
-    networks:
-      - grafana
+    network_mode: host
+    pid: host
     labels:
       # watch all tags
       - diun.watch_repo=true
