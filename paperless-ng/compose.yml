@@ -33,7 +33,7 @@
 version: "3.4"
 services:
   broker:
-    image: docker.io/library/redis:8.0.2
+    image: docker.io/library/redis:8.0.3
     container_name: paperless-redis
     restart: unless-stopped
     networks:
@@ -138,7 +138,7 @@ services:
       - diun.enable=true
 
   tika:
-    image: docker.io/apache/tika:3.2.0.0-full
+    image: docker.io/apache/tika:3.2.1.0-full
     container_name: paperless-tika
     restart: unless-stopped
     networks:
