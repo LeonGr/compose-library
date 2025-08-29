@@ -33,7 +33,7 @@
 version: "3.4"
 services:
   broker:
-    image: docker.io/library/redis:8.0.3
+    image: docker.io/library/redis:8.2.1
     container_name: paperless-redis
     restart: unless-stopped
     networks:
@@ -51,7 +51,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:17.5
+    image: docker.io/library/postgres:17.6
     container_name: paperless-postgres
     restart: unless-stopped
     volumes:
@@ -75,7 +75,7 @@ services:
       - diun.enable=true
 
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.17.1
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.18.2
     container_name: paperless-webserver
     restart: unless-stopped
     depends_on:
@@ -118,7 +118,7 @@ services:
       - diun.enable=true
 
   gotenberg:
-    image: docker.io/thecodingmachine/gotenberg:8.21.1
+    image: docker.io/thecodingmachine/gotenberg:8.22.0
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
@@ -138,7 +138,7 @@ services:
       - diun.enable=true
 
   tika:
-    image: docker.io/apache/tika:3.2.1.0-full
+    image: docker.io/apache/tika:3.2.2.0-full
     container_name: paperless-tika
     restart: unless-stopped
     networks:
