@@ -3,7 +3,7 @@
 
 services:
   db:
-    image: docker.io/library/postgres:17.5
+    image: docker.io/library/postgres:17.6
     container_name: healthchecks-postgres
     volumes:
       - ./data:/var/lib/postgresql/data
@@ -23,7 +23,7 @@ services:
       - diun.enable=true
 
   web:
-    image: docker.io/healthchecks/healthchecks:v3.10
+    image: docker.io/healthchecks/healthchecks:v3.11
     container_name: healthchecks-web
     env_file:
         - .env
