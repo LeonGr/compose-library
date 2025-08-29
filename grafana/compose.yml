@@ -2,7 +2,7 @@ version: '3'
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:12.1.0
+    image: docker.io/grafana/grafana-oss:12.1.1
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
@@ -129,7 +129,7 @@ services:
       - diun.enable=true
 
   prometheus_podman_exporter:
-    image: quay.io/navidys/prometheus-podman-exporter:v1.17.2
+    image: quay.io/navidys/prometheus-podman-exporter:v1.18.0
     container_name: grafana-prometheus-podman-exporter
     command: --collector.enhance-metrics
     environment:
