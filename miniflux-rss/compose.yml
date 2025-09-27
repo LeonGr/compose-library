@@ -3,7 +3,7 @@
 version: '3.4'
 services:
   miniflux:
-    image: docker.io/miniflux/miniflux:2.2.12
+    image: docker.io/miniflux/miniflux:2.2.13
     container_name: miniflux
     restart: unless-stopped
     ports:
@@ -33,7 +33,7 @@ services:
       - diun.enable=true
 
   db:
-    image: docker.io/library/postgres:17.6
+    image: docker.io/library/postgres:18.0
     container_name: miniflux-postgres
     restart: unless-stopped
     environment:
