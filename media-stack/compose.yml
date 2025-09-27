@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.26.2
+    image: docker.io/linuxserver/radarr:5.27.5
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -169,7 +169,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.5.2
+    image: docker.io/linuxserver/bazarr:1.5.3
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -275,7 +275,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.45.01
+    image: ghcr.io/haveagitgat/tdarr:2.46.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -341,7 +341,7 @@ services:
       - diun.enable=true
 
   jellystat-db:
-    image: docker.io/library/postgres:17.6
+    image: docker.io/library/postgres:18.0
     container_name: media-jellystat-postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -419,7 +419,7 @@ services:
       - diun.enable=true
 
   letterboxd-monitor:
-    image: docker.io/screeny05/letterboxd-list-radarr:1.2.0
+    image: docker.io/screeny05/letterboxd-list-radarr:1.2.2
     container_name: media-letterboxd-monitor
     ports:
         - 5000:5000
