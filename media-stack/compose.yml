@@ -348,7 +348,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ~/Media/media-stack/jellystat/data:/var/lib/postgresql/data
+      - ~/Media/media-stack/jellystat/data:/var/lib/postgresql/18/docker
     labels:
       # watch all tags
       - diun.watch_repo=true
