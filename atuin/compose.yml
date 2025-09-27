@@ -33,7 +33,7 @@ services:
     image: docker.io/library/postgres:18.0
     restart: unless-stopped
     volumes:
-      - "./data:/var/lib/postgresql/data/"
+      - "./data:/var/lib/postgresql/18/docker"
     environment:
       POSTGRES_USER: $ATUIN_DB_USERNAME
       POSTGRES_PASSWORD: $ATUIN_DB_PASSWORD
