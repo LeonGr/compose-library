@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.10.7
+    image: docker.io/jellyfin/jellyfin:10.11.0
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -113,7 +113,7 @@ services:
       # - 6789:6789
 
   radarr:
-    image: docker.io/linuxserver/radarr:5.27.5
+    image: docker.io/linuxserver/radarr:5.28.0
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -197,7 +197,7 @@ services:
       - diun.enable=true
 
   lidarr:
-    image: docker.io/linuxserver/lidarr:2.13.3
+    image: docker.io/linuxserver/lidarr:2.14.5
     container_name: media-lidarr
     restart: unless-stopped
     environment:
@@ -275,7 +275,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.46.01
+    image: ghcr.io/haveagitgat/tdarr:2.49.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -441,7 +441,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:8.2.1
+    image: docker.io/library/redis:8.2.2
     container_name: media-redis
     restart: unless-stopped
     volumes:
@@ -459,7 +459,7 @@ services:
       - diun.enable=true
 
   scraparr:
-    image: ghcr.io/thecfu/scraparr:2.2.4
+    image: ghcr.io/thecfu/scraparr:2.2.5
     container_name: media-scraparr
     ports:
       - "7100:7100"
