@@ -57,36 +57,6 @@ services:
       # enable diun
       - diun.enable=true
 
-  syncv3:
-    image: ghcr.io/matrix-org/sliding-sync:v0.99.19
-    container_name: matrix-sliding-sync-proxy
-    environment:
-      - SYNCV3_SERVER=http://matrix-synapse:8008 # Destination homeserver
-      - SYNCV3_SECRET=${SYNCV3_SECRET}
-      - SYNCV3_DB=user=synapse dbname=syncv3 sslmode=disable password=${DB_PASSWORD} host=matrix-postgres # psql connection string
-      - SYNCV3_BINDADDR=0.0.0.0:8009 # The interface and port to listen on
-      - SYNCV3_PROM=:2112 # Enable Prometheus metrics
-    ports:
-      - 8009:8009
-      - 2112:2112
-    networks:
-      - matrix
-    depends_on:
-      - db
-      - synapse
-    labels:
-      # watch all tags
-      - diun.watch_repo=true
-      # maximum number of tags to watch
-      - diun.max_tags=3
-      # sort by semantical versioning order
-      - diun.sort_tags=semver
-      # regular expression to filter tags
-      - diun.include_tags=^v\d+\.\d+\.\d+$
-      # enable diun
-      - diun.enable=true
-
-
 networks:
   grafana:
     external: true
