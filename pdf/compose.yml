@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   stirling-pdf:
-    image: ghcr.io/stirling-tools/stirling-pdf:1.3.2
+    image: ghcr.io/stirling-tools/stirling-pdf:1.5.0
     container_name: pdf-stirling
     ports:
       - '2939:8080'
