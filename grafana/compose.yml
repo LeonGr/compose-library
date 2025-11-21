@@ -6,6 +6,7 @@ services:
     container_name: grafana
     environment:
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+      - GF_DATE_FORMATS_DEFAULT_TIMEZONE=UTC
     volumes:
       - grafana-storage:/var/lib/grafana
     ports:

@@ -12,6 +12,7 @@ services:
       - ../nginx/self_signed/rootCA.crt:/ca.crt:ro
     environment:
       NODE_EXTRA_CA_CERTS: '/ca.crt' # make node.js accept cert
+      TZ: UTC
     cap_add:
       - NET_RAW
     labels:

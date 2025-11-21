@@ -14,7 +14,7 @@ services:
       - "$XDG_RUNTIME_DIR/podman/podman.sock:/var/run/docker.sock"
       #- "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
     environment:
-      - "TZ=Europe/Amsterdam"
+      - "TZ=UTC"
       # - "LOG_LEVEL=debug"
       - "LOG_JSON=false"
       - "DIUN_WATCH_WORKERS=10"
