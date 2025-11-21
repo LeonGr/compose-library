@@ -119,7 +119,7 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./radarr:/config
       - ~/Media/media-stack/movies:/movies
@@ -147,7 +147,7 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./sonarr:/config
       - ~/Media/media-stack/movies:/movies
@@ -175,7 +175,7 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./bazarr:/config
       - ~/Media/media-stack/movies:/movies
@@ -203,7 +203,7 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./lidarr:/config
       - ~/Media/media-stack/music:/music
@@ -230,7 +230,7 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./prowlarr:/config
     ports:
@@ -254,7 +254,7 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./readarr:/config
       - ~/Media/media-stack/books:/books
@@ -282,7 +282,7 @@ services:
       - 8265:8265 # webUI port
       - 8266:8266 # server port
     environment:
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
       - PUID=1001
       - PGID=1001
       - UMASK_SET=002
@@ -323,7 +323,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     volumes:
       - ./ombi:/config
     ports:
@@ -401,7 +401,7 @@ services:
     depends_on:
       - jellyfin
     environment:
-      TZ: 'Europe/Amsterdam'
+      TZ: 'UTC'
     devices:
       # VAAPI Devices
       - /dev/dri/renderD128:/dev/dri/renderD128

@@ -17,7 +17,7 @@ services:
       - TA_USERNAME=${TA_USERNAME}
       - TA_PASSWORD=${TA_PASSWORD}
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
-      - TZ=Europe/Amsterdam
+      - TZ=UTC
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 2m
