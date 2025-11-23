@@ -69,6 +69,7 @@ services:
     volumes:
       - ~/Media/media-stack:/data
       - ./transmission:/etc/openvpn/custom
+      - ./transmission-config/:/config
     environment:
       - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
       - OPENVPN_CONFIG=${OPENVPN_CONFIG}
