@@ -3,7 +3,7 @@ version: '3'
 services:
 
   synapse:
-    image: docker.io/matrixdotorg/synapse:v1.140.0
+    image: docker.io/matrixdotorg/synapse:v1.142.1
     container_name: matrix-synapse
     restart: unless-stopped
     environment:
@@ -30,7 +30,7 @@ services:
       - matrix
 
   db:
-    image: docker.io/library/postgres:18.0
+    image: docker.io/library/postgres:18.1
     container_name: matrix-postgres
     environment:
       - POSTGRES_USER=synapse
