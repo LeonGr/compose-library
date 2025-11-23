@@ -97,20 +97,22 @@ services:
       # enable diun
       - diun.enable=true
 
-  # nzbget:
-    # image: docker.io/linuxserver/nzbget:version-v21.1
-    # restart: unless-stopped
-    # container_name: media-nzbget
-    # environment:
-      # - PUID=1001
-      # - PGID=1001
-      # - TZ=Europe/Europe
-    # volumes:
-      # - ./nzbget:/config
-      # - ~/Media/nzbget/downloads:/downloads
-      # - ~/Media/completed:/downloads/completed
-    # ports:
-      # - 6789:6789
+  nzbget:
+    image: docker.io/linuxserver/nzbget:version-v25.4
+    restart: unless-stopped
+    container_name: media-nzbget
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=UTC
+    volumes:
+      - ./nzbget:/config
+      - ~/Media/nzbget/downloads:/downloads
+      - ~/Media/completed:/downloads/completed
+    ports:
+      - 6789:6789
+    labels:
+      - diun.include_tags=^version-v\d+\.\d+$
 
   radarr:
     image: docker.io/linuxserver/radarr:5.28.0
