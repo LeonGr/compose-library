@@ -108,8 +108,8 @@ services:
       - TZ=UTC
     volumes:
       - ./nzbget:/config
-      - ~/Media/nzbget/downloads:/downloads
-      - ~/Media/completed:/downloads/completed
+      - ~/Media/media-stack/nzbget/downloads/:/downloads
+      - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 6789:6789
     labels:
@@ -129,6 +129,7 @@ services:
       - ~/Media/media-stack/shows:/tv
       - ~/Media/media-stack/downloads:/downloads
       - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 7878:7878
     labels:
@@ -157,6 +158,7 @@ services:
       - ~/Media/media-stack/shows:/tv
       - ~/Media/media-stack/downloads:/downloads
       - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 8989:8989
     labels:
@@ -185,6 +187,7 @@ services:
       - ~/Media/media-stack/shows:/tv
       - ~/Media/media-stack/downloads:/downloads
       - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 6767:6767
     labels:
@@ -212,6 +215,7 @@ services:
       - ~/Media/media-stack/music:/music
       - ~/Media/media-stack/downloads:/downloads
       - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 8686:8686
     labels:
@@ -263,6 +267,7 @@ services:
       - ~/Media/media-stack/books:/books
       - ~/Media/media-stack/downloads:/downloads
       - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 8787:8787
     labels:
