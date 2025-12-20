@@ -68,8 +68,9 @@ services:
       - NET_ADMIN
     volumes:
       - ~/Media/media-stack:/data
-      - ./transmission:/etc/openvpn/custom
-      - ./transmission-config/:/config
+      - ./transmission/openvpn/:/etc/openvpn/custom
+      - ./transmission/config/:/config
+      - ./transmission/extract_torrent.sh:/extract_torrent.sh
     environment:
       - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
       - OPENVPN_CONFIG=${OPENVPN_CONFIG}
@@ -80,6 +81,8 @@ services:
       - CREATE_TUN_DEVICE=false
       - PUID=1001
       - PGID=1001
+      - TRANSMISSION_SCRIPT_TORRENT_DONE_ENABLED=true
+      - TRANSMISSION_SCRIPT_TORRENT_DONE_FILENAME=/extract_torrent.sh
     sysctls:
         - "net.ipv6.conf.all.disable_ipv6=0"
     ports:
