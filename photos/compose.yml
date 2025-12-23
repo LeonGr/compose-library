@@ -2,7 +2,7 @@ version: "3"
 
 services:
   photoprism:
-    image: docker.io/photoprism/photoprism:250707-ce
+    image: docker.io/photoprism/photoprism:251130-ce
     container_name: photos-photoprism
     depends_on:
       - mariadb
