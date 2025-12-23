@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.11.3
+    image: docker.io/jellyfin/jellyfin:10.11.5
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.58.5
+    image: docker.io/deluan/navidrome:0.59.0
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -373,7 +373,7 @@ services:
       - diun.enable=true
 
   jellystat:
-    image: docker.io/cyfershepard/jellystat:1.1.6
+    image: docker.io/cyfershepard/jellystat:1.1.7
     container_name: media-jellystat
     restart: unless-stopped
     environment:
