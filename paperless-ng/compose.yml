@@ -75,7 +75,7 @@ services:
       - diun.enable=true
 
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.0
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.3
     container_name: paperless-webserver
     restart: unless-stopped
     depends_on:
@@ -118,7 +118,7 @@ services:
       - diun.enable=true
 
   gotenberg:
-    image: docker.io/thecodingmachine/gotenberg:8.25.0
+    image: docker.io/thecodingmachine/gotenberg:8.25.1
     container_name: paperless-gotenberg
     restart: unless-stopped
     environment:
