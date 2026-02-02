@@ -58,48 +58,53 @@ services:
       # enable diun
       - diun.enable=true
 
-  transmission-openvpn:
-    image: docker.io/haugene/transmission-openvpn:5.3.2
-    container_name: media-transmission-openvpn
-    mem_limit: 2g
-    memswap_limit: 4g
+  wireguard:
+    image: docker.io/linuxserver/wireguard:1.0.20250521
+    container_name: media-wireguard
     restart: "unless-stopped"
     cap_add:
       - NET_ADMIN
-    volumes:
-      - ~/Media/media-stack:/data
-      - ./transmission/openvpn/:/etc/openvpn/custom
-      - ./transmission/config/:/config
-      - ./transmission/extract_torrent.sh:/extract_torrent.sh
+    networks:
+      - wgnet
     environment:
-      - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
-      - OPENVPN_CONFIG=${OPENVPN_CONFIG}
-      - OPENVPN_USERNAME=${OPENVPN_USERNAME}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - LOCAL_NETWORK=192.168.0.0/16
-      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
-      - CREATE_TUN_DEVICE=false
+      - TZ=UTC
       - PUID=1001
       - PGID=1001
-      - TRANSMISSION_SCRIPT_TORRENT_DONE_ENABLED=true
-      - TRANSMISSION_SCRIPT_TORRENT_DONE_FILENAME=/extract_torrent.sh
-    sysctls:
-        - "net.ipv6.conf.all.disable_ipv6=0"
     ports:
-      - 9091:9091
-    devices:
-      - /dev/net/tun:/dev/net/tun
+      - "9091:9091"
+    volumes:
+      - ./transmission-wireguard/wg0.conf:/config/wg_confs/wg0.conf
+    healthcheck:
+      test: ["CMD-SHELL", "wg show | grep -q handshake"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
     labels:
-      # watch all tags
-      - diun.watch_repo=true
-      # maximum number of tags to watch
-      - diun.max_tags=3
-      # sort by semantical versioning order
-      - diun.sort_tags=semver
       # regular expression to filter tags
       - diun.include_tags=^\d+\.\d+\.\d+$
-      # enable diun
-      - diun.enable=true
+
+  transmission-wireguard:
+    image: docker.io/linuxserver/transmission:4.0.6
+    container_name: media-transmission-wireguard
+    restart: "unless-stopped"
+    network_mode: "service:wireguard"
+    depends_on:
+      wireguard:
+        condition: service_healthy
+        restart: true
+    environment:
+      - TZ=UTC
+      - PUID=1001
+      - PGID=1001
+    volumes:
+      - ~/Media/media-stack/transmission/downloads/:/data/
+      - ~/Media/media-stack/transmission/config/:/config/
+      - ./transmission-wireguard/settings.json:/config/settings.json
+      - ./transmission/extract_torrent.sh:/extract_torrent.sh
+    labels:
+      # regular expression to filter tags
+      - diun.include_tags=^\d\.\d+\.\d+$
 
   nzbget:
     image: docker.io/linuxserver/nzbget:version-v25.4
@@ -131,7 +136,7 @@ services:
       - ~/Media/media-stack/movies:/movies
       - ~/Media/media-stack/shows:/tv
       - ~/Media/media-stack/downloads:/downloads
-      - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/transmission/downloads/completed/:/data/completed
       - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 7878:7878
@@ -160,7 +165,7 @@ services:
       - ~/Media/media-stack/movies:/movies
       - ~/Media/media-stack/shows:/tv
       - ~/Media/media-stack/downloads:/downloads
-      - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/transmission/downloads/completed/:/data/completed
       - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 8989:8989
@@ -189,7 +194,7 @@ services:
       - ~/Media/media-stack/movies:/movies
       - ~/Media/media-stack/shows:/tv
       - ~/Media/media-stack/downloads:/downloads
-      - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/transmission/downloads/completed/:/data/completed
       - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 6767:6767
@@ -217,7 +222,7 @@ services:
       - ./lidarr:/config
       - ~/Media/media-stack/music:/music
       - ~/Media/media-stack/downloads:/downloads
-      - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/transmission/downloads/completed/:/data/completed
       - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 8686:8686
@@ -269,7 +274,7 @@ services:
       - ./readarr:/config
       - ~/Media/media-stack/books:/books
       - ~/Media/media-stack/downloads:/downloads
-      - ~/Media/media-stack/completed:/data/completed
+      - ~/Media/media-stack/transmission/downloads/completed/:/data/completed
       - ~/Media/media-stack/nzbget/downloads/completed/:/downloads/completed
     ports:
       - 8787:8787
@@ -492,3 +497,7 @@ volumes:
   media_redis:
     external: true
     name: media_redis
+
+networks:
+  wgnet:
+    external: false

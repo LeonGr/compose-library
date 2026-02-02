@@ -8,8 +8,7 @@ prowlarr
 navidrome
 nzbget
 bazarr_backup
-transmission/openvpn/
-transmission/config/
+transmission-wireguard
 readarr
 tdarr
 ombi
