@@ -23,7 +23,7 @@ services:
       - diun.enable=true
 
   web:
-    image: docker.io/healthchecks/healthchecks:v3.13
+    image: docker.io/healthchecks/healthchecks:v4.0
     container_name: healthchecks-web
     env_file:
         - .env
