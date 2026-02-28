@@ -3,7 +3,7 @@
 
 services:
   db:
-    image: docker.io/library/postgres:18.1
+    image: docker.io/library/postgres:18.3
     container_name: healthchecks-postgres
     volumes:
       - ./data:/var/lib/postgresql/18/docker
