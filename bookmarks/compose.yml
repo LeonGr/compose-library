@@ -71,3 +71,4 @@ services:
     labels:
       # regular expression to filter tags
       - diun.include_tags=^v\d+\.\d+\.\d+$
+      - diunpp.pin_version=true
