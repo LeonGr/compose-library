@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.60.0
+    image: docker.io/deluan/navidrome:0.60.3
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -85,7 +85,7 @@ services:
       - diun.include_tags=^\d+\.\d+\.\d+$
 
   transmission-wireguard:
-    image: docker.io/linuxserver/transmission:4.1.0
+    image: docker.io/linuxserver/transmission:4.1.1
     container_name: media-transmission-wireguard
     restart: "unless-stopped"
     network_mode: "service:wireguard"
@@ -182,7 +182,7 @@ services:
       - diun.enable=true
 
   bazarr:
-    image: docker.io/linuxserver/bazarr:1.5.5
+    image: docker.io/linuxserver/bazarr:1.5.6
     container_name: media-bazarr
     restart: unless-stopped
     environment:
@@ -357,7 +357,7 @@ services:
       - diun.enable=true
 
   jellystat-db:
-    image: docker.io/library/postgres:18.1
+    image: docker.io/library/postgres:18.3
     container_name: media-jellystat-postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -378,7 +378,7 @@ services:
       - diun.enable=true
 
   jellystat:
-    image: docker.io/cyfershepard/jellystat:1.1.7
+    image: docker.io/cyfershepard/jellystat:1.1.8
     container_name: media-jellystat
     restart: unless-stopped
     environment:
@@ -457,7 +457,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:8.4.0
+    image: docker.io/library/redis:8.6.1
     container_name: media-redis
     restart: unless-stopped
     volumes:
@@ -475,7 +475,7 @@ services:
       - diun.enable=true
 
   scraparr:
-    image: ghcr.io/thecfu/scraparr:2.2.5
+    image: ghcr.io/thecfu/scraparr:3.0.3
     container_name: media-scraparr
     ports:
       - "7100:7100"
