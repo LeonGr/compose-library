@@ -4,7 +4,7 @@ services:
   atuin:
     restart: always
     container_name: atuin
-    image: ghcr.io/atuinsh/atuin:v18.11.0
+    image: ghcr.io/atuinsh/atuin:v18.12.0
     command: server start
     volumes:
       - "./config:/config"
@@ -30,7 +30,7 @@ services:
 
   postgresql:
     container_name: atuin-postgres
-    image: docker.io/library/postgres:18.1
+    image: docker.io/library/postgres:18.3
     restart: unless-stopped
     volumes:
       - "./data:/var/lib/postgresql/18/docker"
