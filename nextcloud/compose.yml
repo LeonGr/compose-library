@@ -115,7 +115,7 @@ services:
     environment:
       - username=${COLLABORA_USERNAME}
       - password=${COLLABORA_PASSWORD}
-      - server_name=collabora.internal
+      - server_name=${COLLABORA_URL}
     labels:
       # watch all tags
       - diun.watch_repo=true
