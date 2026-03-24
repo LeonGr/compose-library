@@ -82,7 +82,7 @@ services:
 
   # Speed up preview generation (based on https://github.com/h2non/imaginary)
   imaginary:
-    image: docker.io/nextcloud/aio-imaginary:20260218_123804
+    image: docker.io/nextcloud/aio-imaginary:20260306_081319
     container_name: nextcloud-imaginary
     volumes:
       - nextcloud:/mnt/data:ro
@@ -106,7 +106,7 @@ services:
       - diun.enable=true
 
   collabora:
-    image: docker.io/collabora/code:25.04.9.2.1
+    image: docker.io/collabora/code:25.04.9.4.1
     container_name: nextcloud-collabora
     ports:
       - "9980:9980"
