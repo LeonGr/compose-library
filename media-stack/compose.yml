@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.11.6
+    image: docker.io/jellyfin/jellyfin:10.11.8
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -34,7 +34,7 @@ services:
 
 
   navidrome:
-    image: docker.io/deluan/navidrome:0.60.3
+    image: docker.io/deluan/navidrome:0.61.2
     container_name: media-navidrome
     restart: unless-stopped
     environment:
@@ -74,12 +74,12 @@ services:
       - "9091:9091"
     volumes:
       - ./transmission-wireguard/wg0.conf:/config/wg_confs/wg0.conf
-    # healthcheck:
-      # test: ["CMD-SHELL", "wg show | grep -q handshake"]
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
-      # start_period: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "wg show | grep -q handshake"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
     labels:
       # regular expression to filter tags
       - diun.include_tags=^\d+\.\d+\.\d+$
@@ -107,7 +107,7 @@ services:
       - diun.include_tags=^\d\.\d+\.\d+$
 
   nzbget:
-    image: docker.io/linuxserver/nzbget:version-v26.0
+    image: docker.io/linuxserver/nzbget:version-v26.1
     restart: unless-stopped
     container_name: media-nzbget
     environment:
@@ -124,7 +124,7 @@ services:
       - diun.include_tags=^version-v\d+\.\d+$
 
   radarr:
-    image: docker.io/linuxserver/radarr:6.0.4
+    image: docker.io/linuxserver/radarr:6.1.1
     container_name: media-radarr
     restart: unless-stopped
     environment:
@@ -239,7 +239,7 @@ services:
       - diun.enable=true
 
   prowlarr:
-    image: docker.io/linuxserver/prowlarr:2.3.0
+    image: docker.io/linuxserver/prowlarr:2.3.5
     container_name: media-prowlarr
     restart: unless-stopped
     environment:
@@ -291,7 +291,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.65.01
+    image: ghcr.io/haveagitgat/tdarr:2.70.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -333,7 +333,7 @@ services:
       - diun.enable=true
 
   ombi:
-    image: ghcr.io/linuxserver/ombi:4.53.4
+    image: ghcr.io/linuxserver/ombi:4.53.5
     container_name: media-ombi
     restart: unless-stopped
     environment:
@@ -378,7 +378,7 @@ services:
       - diun.enable=true
 
   jellystat:
-    image: docker.io/cyfershepard/jellystat:1.1.8
+    image: docker.io/cyfershepard/jellystat:1.1.10
     container_name: media-jellystat
     restart: unless-stopped
     environment:
@@ -457,7 +457,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:8.6.1
+    image: docker.io/library/redis:8.6.2
     container_name: media-redis
     restart: unless-stopped
     volumes:
