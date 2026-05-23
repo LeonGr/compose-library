@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: docker.io/jellyfin/jellyfin:10.11.8
+    image: docker.io/jellyfin/jellyfin:10.11.9
     restart: unless-stopped
     ports:
       - 8096:8096
@@ -291,7 +291,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.70.01
+    image: ghcr.io/haveagitgat/tdarr:2.75.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
@@ -357,7 +357,7 @@ services:
       - diun.enable=true
 
   jellystat-db:
-    image: docker.io/library/postgres:18.3
+    image: docker.io/library/postgres:18.4
     container_name: media-jellystat-postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -457,7 +457,7 @@ services:
 
 
   redis:
-    image: docker.io/library/redis:8.6.2
+    image: docker.io/library/redis:8.6.3
     container_name: media-redis
     restart: unless-stopped
     volumes:
