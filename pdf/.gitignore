@@ -1,2 +1,3 @@
 ./configs/settings.yml
+configs/backup
 stirling-pdf-DB-*.mv.db
