@@ -4,7 +4,7 @@ services:
   atuin:
     restart: unless-stopped
     container_name: atuin
-    image: ghcr.io/atuinsh/atuin:v18.13.3
+    image: ghcr.io/atuinsh/atuin:18.21.0
     command: start
     volumes:
       - "./config:/config"
@@ -24,13 +24,13 @@ services:
       # sort by semantical versioning order
       - diun.sort_tags=semver
       # regular expression to filter tags
-      - diun.include_tags=^v\d+\.\d+\.\d+$
+      - diun.include_tags=^\d+\.\d+\.\d+$
       # enable diun
       - diun.enable=true
 
   postgresql:
     container_name: atuin-postgres
-    image: docker.io/library/postgres:18.4
+    image: docker.io/library/postgres:18.6
     restart: unless-stopped
     volumes:
       - "./data:/var/lib/postgresql/18/docker"
