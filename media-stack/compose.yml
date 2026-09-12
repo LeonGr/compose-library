@@ -291,7 +291,7 @@ services:
       - diun.enable=true
 
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:2.86.01
+    image: ghcr.io/haveagitgat/tdarr:2.87.01
     container_name: media-tdarr
     restart: unless-stopped
     ports:
