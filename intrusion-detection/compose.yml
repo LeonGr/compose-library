@@ -60,7 +60,7 @@ services:
       - elasticsearch
 
   filebeat:
-    image: docker.io/elastic/filebeat:9.5.3
+    image: docker.io/elastic/filebeat:9.5.4
     container_name: ids-filebeat
     hostname: filebeat-callisto
     restart: unless-stopped
